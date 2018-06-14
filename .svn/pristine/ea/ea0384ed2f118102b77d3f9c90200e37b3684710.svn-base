@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    	<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>排行榜</title>
+		
+		<link rel="stylesheet" href="css/sort.css" />
+		
+		
+	</head>
+	<body>
+		
+		<div class="top_bg"></div> 
+		<a class="ph" href="pass.html">继续比赛</a>
+		<div class="sort_kind">
+			<div class="schoose sort_act" kind="1" onclick="sort_kind(this);"><span>世界排名</span></div>
+			<div class="schoose" kind="2" onclick="sort_kind(this);"><span>全校排名</span></div>
+		</div>
+		<div class="head_box" id="sort_list">
+			<!--<div class="sort_box">
+				<div class="sort_a">
+					<div class="diamond"><span>1</span></div>
+				</div>
+				<div class="sort_b">
+					<div class="sort_c">
+						<div class="sort_e">小明</div>
+						<div class="sort_f">希望小学</div>
+					</div>
+					<div class="sort_d">
+						<div class="sort_g">
+							<img src="img/star.jpg" />
+							<span>1234</span>
+						</div>
+					</div>
+				</div>
+				<div class="sort_clear"></div>
+			</div>-->
+			 
+		</div>
+		
+		
+		<div class="bottom_bg">
+			<div class="bottom_info" id="student_sort"></div>
+		</div>
+	</body>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+<script>
+	var rootPath="http://www.chuange.cn/ay";
+	//var rootPath = "http://192.168.0.108:8080/ay";
+	var student_info={"sid":"6c2d5cd0e0d445d2acbd72d9555617aa"};
+	//var student_info={};
+	var kind = 1;
+	function sort_kind(obj){
+		$(".schoose").removeClass("sort_act");
+		$(obj).addClass("sort_act"); 
+		kind = $(obj).attr("kind");
+		
+		get_sort(student_info.sid)
+	}
+	
+	$(function(){
+		
+		var str = OlymlpicAndroid.GetStudent();  
+		student_info =JSON.parse(str);
+		
+		get_sort(student_info.sid)
+	});
+	
+	function get_sort(sid){
+		
+		$.ajax({
+				type: "get",
+				url: rootPath+"/robot/query_sort.do?callback=initpage(data)",
+				dataType: "jsonp",
+				data:{"sid":sid,"kind":kind}
+			}); 
+	}
+	
+	function initpage(data){
+		
+		if(kind == 1){
+			$("#student_sort").html("您的世界排名:第<b>"+data.mysort+"</b>名");
+		}else{
+			$("#student_sort").html("您的全校排名:第<b>"+data.mysort+"</b>名");
+		}
+		
+		if(data.sort_list!= null && data.sort_list.length>0){ 
+			var html = "";
+			
+			for(var i=0;i<data.sort_list.length;i++){
+				
+				var num = i+1;
+				
+				var str = '<div class="sort_box"> <div class="sort_a"> <div class="diamond"><span>'+num+'</span></div> </div>'
+				+'<div class="sort_b"> <div class="sort_c"> <div class="sort_e">'+data.sort_list[i].name+'</div>'
+				+'<div class="sort_f">'+data.sort_list[i].schoolname+'</div> </div> <div class="sort_d">'
+				+'<div class="sort_g"> <img src="img/star.jpg" /> <span>'+data.sort_list[i].star+'</span>'
+				+'</div> </div> </div> <div class="sort_clear"></div> </div>';
+				
+				html = html+str;
+					
+			}
+			
+			$("#sort_list").html(html);
+			
+		}else{
+			$("#sort_list").html("");
+		}
+	}
+	
+</script>
+</html>

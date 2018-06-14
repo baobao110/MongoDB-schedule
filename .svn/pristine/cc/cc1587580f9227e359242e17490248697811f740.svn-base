@@ -1,0 +1,90 @@
+package com.hysm.bean;
+
+import java.util.Iterator;
+
+import net.sf.json.JSONArray;
+
+import com.alibaba.fastjson.JSONObject;
+import com.hysm.game.GameUtil;
+import com.hysm.game.GameVO;
+
+public class GameThread implements Runnable {
+	
+	
+	@Override
+	public void run() {
+		//分配组队
+		while(GameUtil.ZDWORK){
+			
+			//等待组合
+			
+			if(!GameUtil.cusers.isEmpty()){
+				
+				Iterator<String>	it=GameUtil.cusers.keySet().iterator();
+				
+				if(it.hasNext()){
+					String user1=it.next();
+					
+					if(it.hasNext()){
+						String user2=it.next();
+						if(user2!=null){
+							
+							
+							long ctime=System.currentTimeMillis();
+							GameVO oneg=new GameVO();
+							
+							JSONObject onegame=new JSONObject();
+							
+							JSONArray users=new JSONArray();
+							JSONObject user1obj=new JSONObject();
+							user1obj.put(GameUtil.USER_ID, user1);
+							user1obj.put(GameUtil.USER_TIME, ctime);
+							user1obj.put(GameUtil.USER_NAME, "用户一");
+							user1obj.put(GameUtil.USER_SCORE,0);//得分
+							user1obj.put(GameUtil.USER_SUC_NUM,0);//答对0题
+							users.add(user1obj);
+							
+							JSONObject user2obj=new JSONObject();
+							user1obj.put(GameUtil.USER_ID, user2);
+							user2obj.put(GameUtil.USER_TIME, ctime);
+							user2obj.put(GameUtil.USER_NAME, "用户二");
+							user2obj.put(GameUtil.USER_SCORE,0);//得分
+							user2obj.put(GameUtil.USER_SUC_NUM,0);//答对0题
+							users.add(user2obj);
+							
+							
+							onegame.put(GameUtil.USERS, users);
+							
+							
+							onegame.put(GameUtil.GAMESTATE,GameUtil.status[0]);//初始
+							oneg.setData(onegame);
+							
+							
+							GameUtil.games.put(user2+user1, oneg);
+							
+						
+							GameUtil.cusers.remove(user1);
+							GameUtil.cusers.remove(user2);
+						}
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
+
+	}
+
+}

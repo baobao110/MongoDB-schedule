@@ -1,0 +1,26 @@
+package com.hysm.db;
+
+import java.util.List;
+
+import org.bson.Document;
+import org.springframework.stereotype.Component;
+
+import com.hysm.db.mongo.MongoUtil;
+
+@Component
+public class HistroryDB {
+	
+	MongoUtil mu = MongoUtil.getThreadInstance();
+	
+	/**
+	 * 查询全部
+	 * @param db_name
+	 * @param doc
+	 * @return
+	 */
+	public List<Document> query_db_all(String db_name,Document doc){
+		 
+		return mu.find(db_name, doc);
+		 
+	}
+}

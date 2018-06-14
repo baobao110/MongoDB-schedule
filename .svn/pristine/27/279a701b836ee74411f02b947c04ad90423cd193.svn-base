@@ -1,0 +1,191 @@
+.layui-input-block {
+	text-align: left;
+}
+.width150{
+	
+	width: 150px
+}
+.width200{
+	
+	width: 200px
+}
+.width300{
+	
+	width: 300px
+}
+.width500{
+	
+	width: 500px
+}
+.layui-container{
+	width:90%;
+	margin-left: 14px
+}
+/*图片*/
+#imgsdiv {
+	width: auto;
+	display: inline-block;
+	padding-bottom: 20px
+}
+
+#imgsdiv .onegimg{
+	width: 320px;
+	min-height:100px;
+	border-radius: 3px;
+	margin-left: 10px;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	border:1px solid #f0f0f0;
+	
+}
+
+#imgsdiv .imgdivshow{
+	width: 70px;
+	min-height:70px;
+	border-radius: 3px;
+	margin-left: 10px;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	border:1px solid #f0f0f0;
+	
+}
+
+.onegimg div.delimg {
+	position: absolute;
+	z-index: 99;
+	width: 20px;
+	height: 20px;
+	background: #ffffff url("del.png");
+	background-size: 100%;
+	right: 0px;
+	top: 0px;
+	border-radius: 10px
+}
+
+#imgsdiv  .imgdivshow {
+	border: 1px dashed #aaa;
+	text-align: center;
+	line-height: 70px;
+}
+
+.onegimg img {
+	width: 100%;
+	min-height:70px;
+	height:auto;
+	
+}
+
+
+
+
+/****/
+.layui-input.smdiv{
+	
+	width:80px;
+	
+}
+
+.layui-tab-item{
+	
+	background: #FFFFFF;
+	padding: 2%
+	
+}
+.layui-timeline-axis{
+	
+	background-color: transparent;
+	
+}
+.layui-timeline-title{
+	
+	cursor: pointer;
+	
+}
+.layui-timeline-title:hover{
+	color:#FF5722
+}
+b.red{
+	
+	margin-right: 3px;
+	color:#FF5722;
+	font-size: 15px
+}
+
+
+/**提示***/
+p.info{
+	
+	color:#FF7272;
+	font-size: 12px;
+	margin-top: 10px
+}
+
+#startupdiv .layui-form-checkbox{
+	min-width:130px;
+	text-align: left;
+	
+}
+
+.linkdiv .layui-form-checkbox{
+	min-width:150px;
+	text-align: left;
+	
+}
+
+.limita_div{
+	
+	margin-left: 30px;margin-top: 10px
+}
+
+.oneaddress{
+	
+	width: 350px;
+	
+	/* overflow: hidden; text-overflow:ellipsis; white-space:nowrap; */
+}
+ .delthis{
+	display:inline-block;
+	
+	color:#888;
+	font-weight: 500;
+	margin-left: 20px;
+	margin-right:20px;
+	font-size: 20px;
+	line-height: 50px;
+		
+}
+ .delthis:hover{
+ color:red;
+ font-size: 25px
+ }
+
+.oneaddarea{
+	
+	display: inline-block;
+	
+	border:1px solid #f0f0f0;
+	
+	
+}
+.oneaddarea label{
+	
+	line-height: 37px;
+	
+}
+#addlimit2{
+	display: block;
+	width: 100px
+}
+
+.onemodal .onedel{
+	
+	margin-left:15px;
+	font-size: 30px;
+	color:#aaa
+}

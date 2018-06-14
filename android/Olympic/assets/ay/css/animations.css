@@ -1,0 +1,215 @@
+@-webkit-keyframes halo {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(1.2);
+	}
+}
+
+@-moz-keyframes halo {
+	0% {
+		opacity: 0;
+		-moz-transform: scale(0.1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-moz-transform: scale(1.2);
+	}
+}
+
+@-ms-keyframes halo {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@-o-keyframes halo {
+	0% {
+		opacity: 0;
+		-o-transform: scale(0.1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-o-transform: scale(1.2);
+	}
+}
+
+@keyframes halo {
+	0% {
+		opacity: 0;
+		transform: scale(0.1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.2);
+	}
+}
+
+
+
+/* 从左部来*/
+
+.pt-page-FromLeft {
+	-webkit-animation: FromLeft 1s ease both;
+	animation: FromLeft 1s ease both;
+}
+
+
+/* 从右部来*/
+
+.pt-page-FromRight {
+	-webkit-animation: FromRight 1s ease both;
+	animation: FromRight 1s ease both;
+}
+
+
+/* 从左部来*/
+
+@-webkit-keyframes FromLeft {
+	from {
+		-webkit-transform: translateX(-100%);
+		opacity: 0;
+	}
+}
+
+@keyframes FromLeft {
+	from {
+		-webkit-transform: translateX(-100%);
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+}
+
+
+/* 从右部来*/
+
+@-webkit-keyframes FromRight {
+	from {
+		-webkit-transform: translateX(100%);
+		opacity: 0;
+	}
+}
+
+@keyframes FromRight {
+	from {
+		-webkit-transform: translateX(100%);
+		transform: translateX(100%);
+	}
+}
+
+
+
+/*出现*/
+
+.pt-page-scaleUp {
+	-webkit-animation: scaleUp 1s ease both;
+	animation: scaleUp 1s ease both;
+}
+
+@-webkit-keyframes scaleUp {
+	from {
+		opacity: 0;
+		-webkit-transform: scale(.6);
+	}
+}
+
+@keyframes scaleUp {
+	from {
+		opacity: 0;
+		-webkit-transform: scale(.6);
+		transform: scale(.6);
+	}
+}
+
+
+/* 放大 */
+
+.pt-page-scaleBig {
+	-webkit-animation: scaleBig 1s ease both;
+	animation: scaleBig 1s ease both;
+}
+
+@-webkit-keyframes scaleBig {
+	from {
+		-webkit-transform: scale(.2);
+	}
+}
+
+@keyframes scaleBig {
+	from {
+		-webkit-transform: scale(.2);
+		transform: scale(.2);
+	}
+}
+
+
+/* 从底部向上*/
+
+.pt-page-FromBottom {
+	-webkit-animation: FromBottom 1s ease both;
+	animation: FromBottom 1s ease both;
+}
+
+
+/* 从底部向上*/
+
+@-webkit-keyframes FromBottom {
+	from {
+		-webkit-transform: translateY(100%);
+		opacity: 0;
+	}
+}
+
+@keyframes FromBottom {
+	from {
+		-webkit-transform: translateY(100%);
+		transform: translateY(100%);
+		opacity: 0;
+	}
+}
+
+
+/* 从上部来*/
+
+.pt-page-FromTop {
+	-webkit-animation: FromTop 1s ease both;
+	animation: FromTop 1s ease both;
+}
+
+
+/* 从上部来*/
+
+@-webkit-keyframes FromTop {
+	from {
+		-webkit-transform: translateY(-100%);
+		opacity: 0;
+	}
+}
+
+@keyframes FromTop {
+	from {
+		-webkit-transform: translateY(-100%);
+		transform: translateY(-100%);
+	}
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    	<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>奥运知识pk</title>
+		
+		<link rel="stylesheet" href="css/pass.css" />
+		 
+	</head>
+	<body> 
+		<div class="top_bg"></div>
+		
+		<a class="ph" href="sort.html">排行榜</a>
+		
+		<div class="head_box">
+			<div class="student_info" id="student_info"></div> 
+			<div class="pk_data">
+				<div class="pk_b"><img src="img/exp.png"/><span id="rank"></span><lable class="myprogress"  style="float: left; margin-left: -20px;"></lable><div style="clear: both;"></div></div>
+				<!--<div class="pk_a"><img src="img/exp.png"/><span id="experience"></span></div>-->
+				<div class="pk_a"><img src="img/jf.png"/><span id="score"></span></div> 
+				<div class="pk_a"><img src="img/star.jpg"/><span id="star"></span></div>
+				
+				<div style="clear: both;"></div>
+			</div> 
+		</div>
+		
+		<ui class="pass_page" id="pass_list"> 
+			<!--<li class="pass_item">
+				<div class="pass_box">
+					<div class="pass_img"><a>1</a></div>
+					<div class="pass_name">第一关</div>
+					<div class="pass_star"><img src="img/star.jpg"/><span>12345</span></div>
+				</div> 
+			</li>
+			<li class="pass_item pass_lock">
+				<div class="pass_box">
+					<div class="pass_img"><a>2</a></div>
+					<div class="pass_name">第二关</div>
+					<div class="pass_star"><img src="img/star.jpg"/><span>12345</span></div>
+				</div>
+			</li>-->
+			 
+		</ui>
+		
+	</body>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+	<script type="text/javascript" src="js/progressBar.js" ></script>
+	<script>
+		var rootPath="http://192.168.0.108:8080/ay";
+		//var student_info={"studentid":1234,"schoolcode":"000001"};
+		var student_info={};
+		
+		$(function (){ 
+			 
+			var str = OlymlpicAndroid.GetStudent();  
+			student_info =JSON.parse(str);
+			
+			$.ajax({
+				type: "get",
+				url: rootPath+"/robot/studentpass.do?callback=initpage(data)",
+				dataType: "jsonp",
+				data:{"studentid":student_info.studentid,"schoolcode":student_info.schoolcode}
+			}); 
+		}); 
+		
+		function initpage(data){
+			  $("#student_info").html(data.name+"<span>（"+data.schoolname+data.grade+data.classname+"）</span>");
+			  $("#rank").text(data.rank); 
+			  $("#score").text(data.score); 
+			 
+			  $("#star").text(data.star); 
+			  
+			  var num = Math.round(data.experience/data.next_exp * 100);
+			   
+			  $(".myprogress").attr("w",num);
+			  init_progress();
+			  
+			  var list = data.passlist;
+			  
+			  if(list!= null && list.length>0){
+			  	
+			  	var html = "";
+			  	 
+			  	for(var i=0;i<list.length;i++){
+			  		
+			  		var p = 'class="pass_item" pid="'+list[i]._id+'" pnum="'+list[i].passnum+'" onclick="choose_pass(this);" ';
+			  		if(list[i].passnum > data.passnum){
+			  			var p = 'class="pass_item pass_lock" ';
+			  		}
+			  		
+			  		var str = '<li '+p+'>'
+			  		+'<div class="pass_box">'
+					+'<div class="pass_img"><a>'+list[i].passnum+'</a></div>'
+					+'<div class="pass_name">'+list[i].pass+'</div>'
+					+'<div class="pass_star"><img src="img/star.jpg"/><span>'+list[i].star+'</span></div>'
+					+'</div></li>';
+					
+					html = html +str;
+			  	}
+			  	
+			  	$("#pass_list").html(html);
+			  	$("#pass_list").show();
+			  }else{
+			  	$("#pass_list").hide();
+			  }
+		}
+		
+		function choose_pass(obj){ 
+			var pid = $(obj).attr("pnum");
+			
+			//进入比赛
+			window.location.href="pbindex.html?passnum="+pid;
+		}
+	</script>
+</html>

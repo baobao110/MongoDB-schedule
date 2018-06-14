@@ -1,0 +1,34 @@
+package com.hysm.service.impl;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hysm.db.AdvertiseDB;
+import com.hysm.db.MessageDB;
+import com.hysm.service.adService;
+import com.hysm.util.DateUtil;
+import com.hysm.util.StringUtil;
+
+@Service("adService")
+public class adServiceImpl implements adService{
+	
+	@Autowired
+	private AdvertiseDB ad;
+
+	@Override
+	public int save(Document doc) {
+		// TODO Auto-generated method stub
+		long ctime=System.currentTimeMillis();
+		String id=DateUtil.getLocalByDate4()+StringUtil.getRandomString(3)+"0"+doc.getString("merid");
+		
+		doc.put("_id", id);
+		doc.put("ctime",ctime);
+		doc.put("ctimestr",DateUtil.fromDate24H());
+		doc.put("state", 1);
+		return ad.insertMess(doc);
+	}
+	
+	
+
+}

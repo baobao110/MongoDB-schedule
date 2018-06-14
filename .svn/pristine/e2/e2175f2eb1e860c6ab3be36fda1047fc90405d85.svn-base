@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>奥运机器人平台管理</title>
+<script type="text/javascript" src="/ay/assets/ui/libs/bower/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+
+	var paths = [ {
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	}, {
+		type : "link",
+		path : "/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/global.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/animate.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/login.css"
+	} 
+	];
+	
+	function save(name,value){
+		localStorage.setItem(name,value);
+	}
+
+	addFilesSRC(paths);
+
+	 $(document).ready(function(){
+				
+	  		 $.ajax({
+	            type : "POST",
+	            dataType : "json",
+	            url : "/ay/login/toLogin.do",
+	            data :{},
+	            success : function(ajaxDAO) {
+	                if (ajaxDAO.success) {
+	                  save("UUID",ajaxDAO.data);
+	                }
+	              
+	            }
+	        });
+	});
+	 
+	 
+	
+</script>
+
+<div class="container and">
+	<div class="content">
+		<div id="large-header" class="large-header">
+			<canvas id="demo-canvas"></canvas>
+			<div id="login">
+				<h1>
+					<strong>奥运机器人平台管理</strong>
+				</h1>
+
+				<div class="user info">
+					<label>U</label> <input type="text" name="data[User][username]"
+					 id="username" class="en-font" placeholder="账号"
+						autocomplete="off" >
+				</div>
+				<div class="pwd info">
+					<label>P</label> <input type="password" name="data[User][password]"
+						 id="password" class="en-font" placeholder="密码"
+						autocomplete="off">
+				</div>
+
+				<div class="sub">
+					<input type="submit" id="loginsubmit" value="立即登录" />
+				</div>
+				
+				
+				<center><button onclick="window.location.href='/ay/pages/pt/common/mregister.html'">立即注册</button></center>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var paths2 = [ {
+	type : "src",
+	path : "/assets/js/jquery-3.1.1.min.js"
+}, {
+	type : "src",
+	path : "/assets/layui/layui.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/global.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/jquery.nicescroll.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/TweenLite.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/EasePack.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/demo-1.js"
+} ];
+
+addFilesSRC(paths2);
+
+$('#loginsubmit').click(function (){
+	  /* layer.closeAll(); */
+	/*   alert("xxxxx"); */
+	 /*  var username = $('#UserUsername').val();
+	  var password = $('#UserPassword').val(); */
+	  
+	  var param={
+				name:$('#username').val(),
+				password:$('#password').val()
+			};
+	  
+	  $.ajax({
+	        type : "POST",
+	        dataType : "json",
+	        url : "/ay/login/check.do",
+	        data : param,
+	        success : function(ajaxDAO) {
+	     	   
+	            if (ajaxDAO.success) {
+	         	   window.open("http://localhost:8080/ay/pages/pt/common/pcindex.html");
+	            }
+	            else{
+	            	alert(ajaxDAO.message);
+	            }
+	          
+	        }
+	    });
+})
+
+	
+</script>
+
+<!-- <script type="text/javascript">
+
+var paths2 = [ {
+	type : "src",
+	path : "/assets/js/jquery-3.1.1.min.js"
+}, {
+	type : "src",
+	path : "/assets/layui/layui.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/global.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/jquery.nicescroll.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/TweenLite.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/EasePack.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/demo-1.js"
+} ];
+
+addFilesSRC(paths2);
+
+var layer;
+layui.use(['layer', 'carousel'], function () {
+   
+    layer= layui.layer;
+   
+    
+}); -->
+
+<!-- /* $('#loginSubmit').click(function () {
+   /*  layer.closeAll(); */
+  /*  alert("xxxxxx");
+    var username = $.trim($('#UserUsername').val());
+    if (!username) {
+        layer.msg('请填写用户名',{
+            anim: 1,
+            offset: '200px'
+        });
+        return false;
+    }
+    var password = $.trim($('#UserPassword').val());
+    if (!password) {
+        layer.msg('请填写密码',{
+            anim: 1,
+            offset: '200px'
+        });
+        return false;
+    }
+  
+    $.ajax({
+        type : "POST",
+        dataType : "json",
+        url : "/ay/login/check.do",
+        data : {name:username,password:password},
+        success : function(ajaxDAO) {
+     	   
+            if (ajaxDAO.success==false) {
+         	   window.open("http://localhost:8080/ay/pages/pt/common/pcindex.html");
+            }
+            else{
+            	alert(ajaxDAO.message);
+            }
+          
+        }
+    });
+    
+   
+  }) */  -->
+  
+  
+
+
+

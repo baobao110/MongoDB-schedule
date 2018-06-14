@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>用户管理员</title>
+  
+  <link rel="stylesheet" href="/ay/assets/layui/css/layui.css" media="all">
+</head>
+<body>
+ 
+<table class="layui-table" id="demo" lay-filter="demo"></table>
+<div class="layui-btn-group">
+  <button class="layui-btn" onclick="add()">增加</button>
+  <button class="layui-btn" onclick="del()">删除</button>
+</div>
+
+ <script type="text/javascript" src="/ay/assets/url.js"></script>
+<script src="/ay/assets/layui/layui.js"></script>
+<!-- <script src="/ay/assets/ui/libs/bower/jquery/dist/jquery.js"></script> -->
+<!-- <script type="text/javascript" src="/ay/assets/url.js"></script> -->
+<script type="text/javascript">
+
+var paths = [  {
+	type : "src",
+	path : "/assets/js/jquery-3.1.1.min.js"
+},{
+	type : "src",
+	path : "/assets/layui/layui.js"
+}
+
+
+
+
+//
+, {
+	type : "src",
+	path : "/assets/utils/mess/tmutil.js",
+	version:2
+}
+,{
+	type : "src",
+	path : "/assets/login.js"
+
+} 
+
+];
+
+var bpath=getRootPath();
+var json = { elem: "#demo" 
+	        ,url:bpath + "/admin/admin.do" //数据接口
+	         
+	        ,cols: [[ //表头
+	          {field: "name", title: "用户名"}
+	          ,{field: "status", title: "状态"}
+	        ]] 
+	      };
+
+layui.use([ 'form', 'layer', 'jquery', 'table','element' ], function() {
+	var form = layui.form, layer = parent.layer === undefined ? layui.layer
+			: parent.layer,element = layui.element;
+	
+	table= layui.table;
+	
+	table.render(json);
+});
+
+	function add(){
+		window.location.href = '/ay/admin/toadd.do';
+	}
+	
+	function del(){
+		window.location.href = '/ay/admin/todelete.do';
+	}
+
+ 
+/* $(document).ready(function(){
+   $.ajax({
+            type : "POST",
+            dataType : "json",
+            url : getRootPath()+"/admin/admin.do",
+            data : {},
+            success : function(ajaxDAO) {
+                if (!ajaxDAO.success) {
+                    alert("非法操作");
+                    return false;
+                }
+              
+            }
+        });
+}); */
+
+ /*  $(document).ready(function(){
+	 
+	  var param={
+        		uuid:get("UUID"),
+			};
+		conosole.log(param.uuid);	
+  		 $.ajax({
+            type : "POST",
+            dataType : "json",
+            url : "/ay/admin/flag.do",
+            data :param,
+            success : function(ajaxDAO) {
+                if (!ajaxDAO.success) {
+                   window.location.href = '/ay/pages/pt/common/login.html';
+                }
+              
+            }
+        });
+}); */
+</script>
+</body>
+</html>

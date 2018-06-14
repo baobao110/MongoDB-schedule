@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg3"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+        
+        <TextView 
+            android:id="@+id/ask_question_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:textColor="@color/xiaoao"
+            android:textSize="20dp"
+            android:text=""/>
+        
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" 
+        android:orientation="vertical">
+         
+       	<LinearLayout 
+       	    android:id="@+id/ask_img_view"
+       	    android:layout_width="fill_parent"
+       	    android:layout_height="fill_parent"
+       	    android:paddingLeft="60dp"
+       	    android:paddingRight="60dp"
+       	    android:orientation="horizontal">
+       	    
+       	    <LinearLayout 
+       	        android:layout_width="0dp"
+       	        android:layout_height="fill_parent"
+       	        android:layout_weight="1"
+       	        android:paddingRight="10dp" 
+       	        android:orientation="vertical">
+       	        
+       	        <ImageView
+       	            android:id="@+id/ask_img_img"
+       	            android:layout_width="fill_parent"
+       	            android:layout_height="360dp" 
+       	            android:layout_gravity="top"
+       	            android:visibility="gone"
+       	            android:background="@drawable/yp"/>
+       	        
+       	    </LinearLayout>
+       	     <LinearLayout 
+       	        android:layout_width="0dp"
+       	        android:layout_height="fill_parent"
+       	        android:layout_weight="2"
+       	        android:paddingLeft="10dp"
+       	        android:orientation="vertical">
+       	        
+       	         <TextView 
+       	             android:id="@+id/ask_img_info"
+       	             android:layout_width="fill_parent"
+       	             android:layout_height="wrap_content"
+       	             android:textColor="@color/white"
+       	             android:textSize="16dp"
+       	             android:text=""/>
+       	        
+       	    </LinearLayout>
+       	    
+       	</LinearLayout>
+       	<LinearLayout 
+       	    android:id="@+id/ask_text_view"
+       	    android:layout_width="fill_parent"
+       	    android:layout_height="fill_parent"
+       	    android:paddingLeft="60dp"
+       	    android:paddingRight="60dp"
+       	    android:visibility="gone"
+       	    android:orientation="horizontal">
+       	     
+       	     <TextView 
+   	             android:id="@+id/ask_text_info"
+   	             android:layout_width="fill_parent"
+   	             android:layout_height="wrap_content"
+   	             android:textColor="@color/white"
+   	             android:textSize="16dp"
+   	             android:text=""/>
+       	 </LinearLayout>
+             
+    </LinearLayout> 
+</LinearLayout>

@@ -1,0 +1,25 @@
+package com.hysm.service.impl;
+
+import java.util.List;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hysm.db.HistroryDB;
+import com.hysm.service.HistoryService;
+
+@Service("HistoryService")
+public class HistoryServiceImpl implements HistoryService{
+	
+	@Autowired
+	private HistroryDB history;
+
+	@Override
+	public List<Document> query_db_all(String db_name, Document doc) {
+		// TODO Auto-generated method stub
+		return history.query_db_all(db_name, doc);
+	}
+
+
+}

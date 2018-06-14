@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>学生管理</title> 
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/messlist.css"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.js"
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths); 
+	
+	
+</script>
+
+<style type="text/css">
+.choose_page{height: 40px; border-bottom: 1px solid #dfdfdf;}
+.choose_page li{min-width: 65px; line-height: 40px; padding: 0px 15px; float: left; text-align: center;cursor: pointer;}
+.choose_act{color: #009688; border-bottom: 2px solid #009688;}
+</style>
+
+  </head>
+  
+  <body>
+    <body class="childrenBody" style="padding: 1%;">
+	<blockquote class="layui-elem-quote news_search" >
+		 <div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入学生姓名" class="layui-input search_input" id="stuname">
+		    </div>
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入学校编号" class="layui-input search_input" id="schoolcode">
+		    </div>
+		    
+		    <a class="layui-btn layui-btn-mini search_btn" onclick="search_student();">查询</a>
+		</div>  
+	</blockquote> 
+	<ul class="choose_page">
+		<li class="choose_act" onclick="choose_it(this);" data="100">全部</li> 
+	    <li onclick="choose_it(this);" data="1">有效</li>
+	    <li onclick="choose_it(this);" data="0">已冻结</li>
+	</ul>
+	<br>
+	
+	<div> 
+	<div class="layui-form">
+	  <table class="layui-table">
+	    
+	    <thead>
+	      <tr>
+	      	<th>序号</th>
+	        <th>学校</th>
+	        <th>姓名</th>
+	        <th>学号</th>
+	        <th>班级</th>
+	        <th>家长</th>
+	         <th>竞答结果</th>
+	        <th>联系方式</th>
+	        <th>状态</th>
+	        <th style="width: 14%;">操作</th>
+	      </tr> 
+	    </thead>
+	    <tbody id="tbody">
+	      
+	    </tbody>
+	  </table>
+	</div>
+	
+		<div style="margin-top: 20px; text-align: center;" id="page_div">
+		 	 
+		</div>
+	
+	</div>
+	
+	<br>
+	
+</body>
+<script type="text/javascript">
+$(function () {
+	query_data(1,100,"");
+});
+function choose_it(obj){
+	$("li").removeClass("choose_act");
+	$(obj).addClass("choose_act");
+	
+	state = $(obj).attr("data");
+	
+	var stuname = $("#stuname").val();
+	var schoolcode = $("#schoolcode").val();
+	 
+	query_data(1,state,stuname,schoolcode);
+}
+
+var page = 1;
+var state = 100;
+
+function query_data(mypage,mystate,myname,mycode){
+	page = mypage;
+	 
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/query_student.do",
+		  data:{"page":mypage,"state":mystate,"student_name":myname,"school_code":mycode},
+		  dataType:"json",
+		  success:function(data){
+			 
+			  set_table(data[0].list);
+			  
+			  set_page(data[0].page_num,data[0].page_count);
+			  
+		  }
+	  });
+}
+
+function set_table(list){
+	
+	if(list!= null && list.length > 0){ 
+		var html ="";
+		var skip = (page-1)*50+1;
+		
+		for(var i=0;i<list.length;i++){
+			var n= skip+i;
+			
+			var a ="<button class='layui-btn layui-btn-primary layui-btn-sm' onclick='edit_it(this);' sid='"+list[i]._id+"'>编辑</button>";
+			
+			var s = "有效";
+			if(list[i].state == 0){
+				s = "已冻结";
+				a =a+"<button class='layui-btn layui-btn-sm' onclick='free_it(this);' sid='"+list[i]._id+"'>解冻</button>";
+			}else{
+				a =a+"<button class='layui-btn layui-btn-sm' onclick='free_it(this);' sid='"+list[i]._id+"'>冻结</button>";
+			}
+			
+			var str = "<tr><td>"+n+"</td><td>编号："+list[i].schoolcode+"<br>名称:"+list[i].schoolname+"</td><td>"+list[i].name+"</td><td>"
+			+list[i].studentid+"</td><td>年级："+list[i].grade+"<br>班级:"+list[i].classname+"</td><td>"+list[i].parent+"</td><td>积分:"+list[i].score+"<br>所得星数:"+list[i].star+"<br>等级:"+list[i].rank+"</td><td>"+list[i].phone+"</td><td>"+s+"</td><td>"+a+"</td><tr>";
+			
+			html = html+str;
+		}
+		
+		$("#tbody").html(html);
+		
+		
+	}else{
+		$("#tbody").html("<tr><td colspan='9'>暂无数据</td></tr>");
+	}
+	
+}
+
+function set_page(num,count){
+	
+	var html ="";
+	
+	if(count > 1){
+		for(var i=1;i<=count;i++){
+			
+			var str = "";
+			if(i == num){
+				 
+				str= "<button class='layui-btn  layui-btn-sm' onclick='into_page(this);' p='"+i+"'>"+i+"</button>";
+			}else{
+				str= "<button class='layui-btn layui-btn-primary layui-btn-sm' onclick='into_page(this);' p='"+i+"'>"+i+"</button>";
+			}
+			
+			html = html+str; 
+			
+		}
+	}
+	 
+	$("#page_div").html(html);
+}
+
+function search_student() {
+	var stuname = $("#stuname").val();
+	var schoolcode = $("#schoolcode").val();
+	 
+	query_data(1,state,stuname,schoolcode);
+}
+
+function into_page(obj) {
+	var mypage = $(obj).attr("p");
+	var stuname = $("#stuname").val();
+	var schoolcode = $("#schoolcode").val();
+	page = mypage;
+	
+	query_data(page,state,stuname,schoolcode);
+}
+
+function free_it(obj) {
+	var sid = $(obj).attr("sid");
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/free_student.do",
+		  data:{"sid":sid},
+		  dataType:"json",
+		  success:function(data){
+			 
+			  if(data[0].back_code == 200){
+				  window.location.href = getRootPath()+"/pages/pt/sc/student_list.html";
+			  }else{
+				  layui_error("提交失败");
+			  }
+			   
+		  }
+	  });
+}
+
+function edit_it(obj){
+	
+	var sid = $(obj).attr("sid");
+	
+	window.location.href = getRootPath()+"/pages/pt/sc/setstudent.html?sid="+sid;
+}
+
+</script>
+</html>

@@ -1,0 +1,540 @@
+/*function orient() {
+	var width = document.documentElement.clientWidth;
+	var height = document.documentElement.clientHeight;
+	//alert(width+","+height);
+	var op = parseFloat(width / height);
+	var test = window.location.href;
+	if(op >= 1) {
+		//横屏
+		if(test.indexOf("pbindex.html") == -1) {
+			window.location.href = "pbindex.html";
+		}
+
+	} else {
+		if(test.indexOf("pbindex.html") != -1) {
+			window.location.href = "index.html";
+		}
+
+	}
+}
+//页面加载时调用
+orient();
+//用户变化屏幕方向时调用
+$(window).bind('orientationchange', function(e) {
+	orient();
+});
+*/
+//比赛规则
+var limittime = 10; //比赛单题限时
+var jdstart = true; //答题开始false是旧题目，new 新题目，第一次默认新的
+
+var nowitem = ""; //当前答题
+var nowindex = 1; //当前答题序号
+/*var starttime = 0;
+var stoptime = 0;*/
+var myanswer = "";
+
+var userinfo = null;
+var uid = null;
+
+var otheruid = "";
+var loadinter = null;
+var myuser = null; //我的
+var otheruser = null; //对方
+
+var INTERWORK = {};
+INTERWORK.inter = null;
+//停止
+INTERWORK.stop = function() {
+	if(INTERWORK.inter != null) {
+		clearInterval(INTERWORK.inter);
+		INTERWORK.inter = null;
+	}
+
+}
+INTERWORK.start = function() {
+
+	INTERWORK.stop();
+	ajaxSatus();
+	INTERWORK.inter = setInterval("ajaxSatus()", 2000);
+}
+
+//请求比赛	
+function ajaxSatus() {
+
+	　
+	$.ajax({
+		type: "get",
+		url: "http://192.168.0.108:8080/ay/jdgame/getData.do?callback=initReq(data)",
+		dataType: "jsonp",
+		data: {
+			uid: uid
+		}
+	});
+
+}
+
+function initReq(data) {
+
+	$("#loadfirst").hide();
+	if(data) {
+		
+		if(parseInt(data.status) == 0) {
+			//初始化
+			$("#main").hide();
+			$("#resarea").hide();
+			
+			showStartPage(data);
+			
+		} else if(parseInt(data.status) == 1) {
+			//答题中
+			showAnswerpage(data);
+
+		} else if(parseInt(data.status) == 2) {
+			//答题结束
+
+			showJDRes(data);
+
+		}
+
+	}else{
+		$("#loadfirst").show();
+	}
+
+}
+
+//识别
+function checkUser(data) {
+	var userlist = data.userlist;
+	var one = userlist[0];
+	var one2 = userlist[1];
+
+	if(one.userid == uid) {
+		myuser = one;
+		otheruser = one2;
+	} else {
+		myuser = one2;
+		otheruser = one;
+	}
+	if(otheruid == null || otheruid == "") {
+		otheruid = otheruser.userid;
+	}
+
+}
+
+//pk对抗页
+function showStartPage(data) {
+	$("#pzpage").show();
+
+	//识别用户
+	checkUser(data);
+
+	$("#myuser").find(".name").text(myuser.username);
+	$("#otheruser").find(".name").text(otheruser.username);
+
+	otheruid = otheruser.userid;
+}
+
+//答题页
+function showAnswerpage(data) {
+	$("#pzpage").hide();
+
+	$("#main").show();
+
+	showNewItemPage(data)
+
+}
+
+function showNewItemPage(data) {
+	//切换新题目
+	var yindex = nowindex;
+
+	changeNewItem(data);
+
+	if(nowindex != yindex) {
+		//显示分数和用户
+		showMainUserInfo(data, data.itemlist[yindex - 1]);
+		//更新
+		setTimeout(function() {
+			changeNewItemPage();
+		}, 1500);
+
+	} else {
+		//显示分数和用户
+		showMainUserInfo(data);
+
+		changeNewItemPage();
+
+	}
+
+}
+//新题目
+function changeNewItemPage() {
+	//新题目
+	if(jdstart) {
+
+		jdstart = false;
+        INTERWORK.stop();
+     
+     
+     	
+		$(".chooseone").removeClass("otherSucchoose");
+		$(".chooseone").removeClass("othererrorchoose");
+		$(".chooseone").removeClass("successchoose");
+		$(".chooseone").removeClass("errorchoose");
+		$(".chooseone").removeClass("sucRes");
+		$("#question").html("");
+		$("#chooseA").find("span").text("");
+		$("#chooseB").find("span").text("");
+		$("#chooseC").find("span").text("");
+		$("#chooseD").find("span").text("");
+
+		//第几题
+		$("#showIndex").find("b").text(nowindex);
+		$("#showIndex").show();
+	
+	     test_speekword("第"+nowindex+"题,"+nowitem.question);
+	     
+	     setTimeout(function() {
+			$("#question").html(nowitem.question);
+		}, 1000);
+		
+	}
+
+}
+//语音合成
+function test_speekword(str){ 
+	
+			OlymlpicAndroid.SpeekWord(str);
+		
+}
+//播放结束	
+function SpeekEnd(){
+	
+	    //同步开始时间，当两人一起开始之后开始
+		ajaxSatrtTime();
+}
+
+
+//确认开始
+function ajaxSatrtTime() {
+
+	$.ajax({
+		type: "get",
+		url: "http://192.168.0.108:8080/ay/jdgame/startJD.do?callback=startJDshow(res)",
+		dataType: "jsonp",
+		data: {
+			uid: uid,
+			index: nowindex
+		}
+	});
+
+}
+
+function startJDshow(res) {
+	INTERWORK.start();
+	if(res == "200") {
+		//开始竞答
+
+		//显示题目
+		$("#showIndex").hide();
+
+		
+		$("#chooseA").find("span").text(nowitem.chooseA);
+		$("#chooseB").find("span").text(nowitem.chooseB);
+		$("#chooseC").find("span").text(nowitem.chooseC);
+		$("#chooseD").find("span").text(nowitem.chooseD);
+
+		$("#iteminfo").show();
+
+		//页面加载完成，显示倒计时
+		if(loadinter == null) {
+			loadinter = new initLoadM(function() {
+
+				document.getElementById("jdloading").children[2].children[0].innerHTML = "0";
+
+				//已经提交自己的成绩
+				sendThisItem();
+
+			}, document.getElementById("jdloading"), limittime, 0);
+		}
+
+		loadinter.init();
+
+	} else {
+		//结束
+		layer.open({
+			content: '对方已离开,比赛结束',
+			skin: 'msg',
+			time: 2 //2秒后自动关闭
+		});
+		setTimeout(function() {
+			showJDRes(res);
+		}, 1000);
+
+	}
+
+}
+//用户分数
+function showMainUserInfo(data, oneitem) {
+
+	//识别用户
+	checkUser(data);
+
+	$("#leftdiv").find(".uname").html(myuser.username);
+	$("#leftdiv").find(".uscore").text(myuser.userscore);
+	$("#rightdiv").find(".uname").text(otheruser.username);
+	$("#rightdiv").find(".uscore").text(otheruser.userscore);
+
+	//答题结果 展示
+	return showItemresult(oneitem);
+}
+//答题结果显示
+function showItemresult(oneitem) {
+	var showitem = nowitem;
+	if(oneitem != null) {
+		showitem = oneitem;
+	}
+	if(showitem.user_res != null) {
+
+		var myres = showitem.user_res[uid];
+		var otherres = showitem.user_res[otheruid];
+		if(myres != null && myres.choose != null && myres.choose != "") {
+			showSucRes($("#choose" + showitem.answer));
+
+			//我的答题结果
+			if(myres.sc > 0) {
+				myobjToSuc($("#choose" + myres.choose));
+			} else {
+				myobjToError($("#choose" + myres.choose))
+			}
+
+			if(otherres != null && otherres.choose != null && otherres.choose != "") {
+				if(otherres.sc > 0) {
+					otherobjToSuc($("#choose" + otherres.choose));
+				} else {
+					otherobjToError($("#choose" + otherres.choose))
+				}
+
+			}
+		}
+
+		if(myres != null && otherres != null && myres.etime != null && otherres.etime != null) {
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+//切换新题目
+function changeNewItem(data) {
+
+	var itemlist = data.itemlist;
+	for(var i = 0, len = itemlist.length; i < len; i++) {
+		var one = itemlist[i];
+		if(one.hadtask == null) {
+			if(nowindex != (i + 1)) {
+				//新题目
+				jdstart = true;
+			}
+
+			nowindex = (i + 1);
+
+			nowitem = one;
+			break;
+		}
+	}
+}
+
+//答题：如果只有本人答题 结果，保持当前这步骤，等待倒计时结束
+function chooseThisAnswer(answer, obj) {
+
+	showSucRes($("#choose" + nowitem.answer));
+	if(nowitem.answer == answer) {
+		//答案一致
+		myobjToSuc($(obj));
+	} else {
+		//答案不一致
+		myobjToError($(obj));
+
+	}
+	myanswer = answer;
+	sendThisItem();
+
+}
+//成功答案显示
+function showSucRes(obj) {
+	if(!obj.hasClass("sucRes")) {
+		obj.addClass("sucRes");
+	}
+}
+//我成功
+function myobjToSuc(obj) {
+	if(!obj.hasClass("successchoose")) {
+		obj.addClass("successchoose");
+	}
+}
+//我失败
+function myobjToError(obj) {
+	if(!obj.hasClass("errorchoose")) {
+		obj.addClass("errorchoose");
+	}
+}
+//对方成功
+function otherobjToSuc(obj) {
+	if(!obj.hasClass("otherSucchoose")) {
+		obj.addClass("otherSucchoose");
+	}
+}
+//对方失败
+function otherobjToError(obj) {
+	if(!obj.hasClass("othererrorchoose")) {
+		obj.addClass("othererrorchoose");
+	}
+}
+
+//答题结果上传并查看
+function sendThisItem() {
+	INTERWORK.stop();　 //上传
+	$.ajax({
+		type: "get",
+		url: "http://192.168.0.108:8080/ay/jdgame/sendThisItem.do?callback=sendThisItemShow(data)",
+		dataType: "jsonp",
+		data: {
+			uid: uid,
+			choose: myanswer,
+			index: nowindex
+		}
+	});
+
+}
+
+function sendThisItemShow(data) {
+
+	nowitem = data.itemlist[nowindex - 1];
+
+	//显示分数和用户
+	showMainUserInfo(data);
+	
+	
+	if(parseInt(data.status)==2){
+		showJDRes(data);
+	}else{
+		INTERWORK.start();
+	}
+	
+	
+
+}
+
+//竞答结果
+function showJDRes(data) {
+
+	INTERWORK.stop();
+
+	if(loadinter != null) {
+
+		loadinter.stop();
+
+	}
+	  //识别用户
+	checkUser(data);
+	
+	
+	$("#resleftdiv").find(".uname").text(myuser.username);
+	$("#resrightdiv").find(".uname").text(otheruser.username);
+
+	$("#headinfo_leftdiv").find(".scorediv").find("b").text(myuser.userscore);
+	$("#headinfo_rightdiv").find(".scorediv").find("b").text(otheruser.userscore);
+
+	$("#headinfo_leftdiv").find(".ucore").find("em").text(myuser.user_suc_num);
+	$("#headinfo_rightdiv").find(".ucore").find("em").text(otheruser.user_suc_num);
+
+	if(myuser.userscore > otheruser.userscore) {
+		//成功
+		$("#headinfo").removeClass("fail");
+		$("#headinfo").removeClass("pj");
+	} else if(myuser.userscore < otheruser.userscore) {
+		$("#headinfo").removeClass("pj");
+		if(!$("#headinfo").hasClass("fail")) {
+			$("#headinfo").toggleClass("fail")
+		}
+	}else if(myuser.userscore == otheruser.userscore){
+		//平局
+		$("#headinfo").removeClass("fail");
+		if(!$("#headinfo").hasClass("pj")) {
+			$("#headinfo").toggleClass("pj")
+		}
+	}
+
+	//显示结果 
+	$("#jfnum").text(myuser.jf);
+	$("#expnum").text(myuser.exp);
+	//同步最新的用户消息
+	if(typeof(OlymlpicAndroid) != "undefined") {
+		OlymlpicAndroid.SyncStudent();
+	}
+	
+	$("#main").hide();
+	$("#resarea").show();
+	
+}
+
+/*****************************/
+function loading() {
+
+	//初始化用户
+	if(typeof(OlymlpicAndroid) != "undefined") {
+		userinfo = JSON.parse(OlymlpicAndroid.GetStudent())
+		uid = userinfo.sid;
+
+		if(userinfo.studentname != null) {
+			//学生名称
+			$("#loadfirst").find(".textdiv").find(".username").text(userinfo.studentname);
+		}
+		if(userinfo.schoolname != null) {
+			//学校
+			$("#loadfirst").find(".textdiv").find(".fromwhere").text("来自：" + userinfo.schoolname);
+		}
+		if(userinfo.rank != null) {
+			//等级
+			$("#loadfirst").find(".textdiv").find(".level").text("等级 " + userinfo.rank);
+		}
+		if(userinfo.img != null) {
+			//用户头像
+			$("#loadfirst").find("#logo").attr("src", userinfo.img);
+		}
+	} else {
+		//模拟测试,正式时删除
+		uid = parseInt(Math.random() * 300) + "";
+	}
+
+
+	
+	//比赛规则请求
+	//ajaxGZ();
+	//比赛请求
+	ajaxSatus();
+
+}
+//开始比赛,列表页面
+function goStart(){
+	window.location.href=window.location.href;
+	
+}
+//退出比赛
+function returnFirst(){
+	
+	
+}
+/**************初始化*****************************************************/
+
+$(function() {
+	loading();
+	INTERWORK.start();
+
+});
+
+

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>竞答关口</title>
+	
+    <meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<script type="text/javascript" src="/ay/assets/url.js"></script>
+	
+	<script type="text/javascript">
+
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/messlist.css"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.all.js"
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths); 
+	
+	
+</script>
+
+  </head>
+  
+  <body class="childrenBody" style="padding: 1%; ">
+   <div>
+  		<button class="layui-btn layui-btn-normal" onclick="add_show();" style="float: right; ">新增关口</button>
+  		<div style="clear: both;"></div>
+   </div>
+   
+   <div class="layui-form">
+	  <table class="layui-table">
+	    
+	    <thead>
+	      <tr>
+	      	<th>序号</th>
+	        <th>关口名称</th>
+	        <th>第几关</th>
+	        <th>闯关星数</th> 
+	        <th>编辑</th>
+	      </tr> 
+	    </thead>
+	    <tbody id="tbody">
+	      
+	    </tbody>
+	  </table>
+	</div>
+   
+  </body>
+<script type="text/javascript">
+var pass_list=[];
+var passid ="";
+
+$(function (){
+	
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/allpass.do",
+		  data:{},
+		  dataType:"json",
+		  success:function(data){
+			  
+			  pass_list = data;
+			 
+			  set_table(data);
+			   
+		  }
+	  });
+});
+
+
+
+function set_table(list){
+	
+	var html = "";
+	
+	for(var i=0;i<list.length;i++){
+		
+		var n= i+1;
+		
+		html = html+"<tr> <td>"+n+"</td> <td>"+list[i].pass+"</td> <td>"+list[i].passnum+"</td> <td>"+list[i].star+"★</td> <td><button pid='"+list[i]._id+"' onclick='edit_show(this);' class='layui-btn layui-btn-sm'>编辑</button></td></tr> ";
+	}
+	
+	$("#tbody").html(html);
+}
+
+function add_show(){
+	
+	passid ="";
+	
+	var html='<div class="layui-form" style=" width: 96%; margin-left: 2%;margin-right: 2%;margin-top: 20px;">';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">关口名称</label> <div class="layui-input-block"> <input type="text" id="passname"  placeholder="请输入关口名称" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">第几关</label> <div class="layui-input-block"> <input type="text" id="passnum"  placeholder="请输入第几关" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">闯关星数</label> <div class="layui-input-block"> <input type="text" id="passstar"  placeholder="请输入闯关星数" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item" style="text-align: center;"> <button class="layui-btn layui-btn-normal" onclick="save_pass();" style=" width: 200px;">保存</button> </div></div>';
+	
+	pass_show(html);
+
+}
+
+function edit_show(obj) {
+	
+	passid = $(obj).attr("pid");
+	
+	var passname = "";
+	var passnum = "";
+	var passstar = "";
+	
+	for(var i=0;i<pass_list.length;i++){
+		if(pass_list[i]._id == passid){
+			passname = pass_list[i].pass;
+			passnum = pass_list[i].passnum;
+			passstar = pass_list[i].star;
+			
+			break;
+		}
+	}
+	
+	var html='<div class="layui-form" style=" width: 96%; margin-left: 2%;margin-right: 2%;margin-top: 20px;">';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">关口名称</label> <div class="layui-input-block"> <input type="text" id="passname" value="'+passname+'"  placeholder="请输入关口名称" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">第几关</label> <div class="layui-input-block"> <input type="text" id="passnum"  value="'+passnum+'"  placeholder="请输入第几关" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item"> <label class="layui-form-label">闯关星数</label> <div class="layui-input-block"> <input type="text" id="passstar" value="'+passstar+'"  placeholder="请输入闯关星数" class="layui-input"></div> </div>';
+	html = html+'<div class="layui-form-item" style="text-align: center;"> <button class="layui-btn layui-btn-normal" onclick="save_pass();" style=" width: 200px;">保存</button> </div></div>';
+	
+	pass_show(html);
+}
+
+function pass_show(html) {
+	//示范一个公告层
+    layer.open({
+      type: 1
+      ,title: '设置关口' //不显示标题栏 
+      ,area: '500px;'
+      ,shade: 0.6
+      ,id: 'LAY_layuipass' //设定一个id，防止重复弹出 
+      ,btnAlign: 'c'
+      ,moveType: 1 //拖拽模式，0或者1
+      ,content: html
+       
+    });
+}
+
+function layui_success(s){ 
+    layer.msg(s, {
+       time: 8000, //20s后自动关闭
+       id: 'LAY_layuipro',
+       btn: ["知道了"]
+       ,success: function(layero){
+          /*  var btn = layero.find('.layui-layer-btn');
+           btn.find('.layui-layer-btn0').attr({"onclick":"success_ok()"}); */
+         }
+
+     });
+}
+
+function success_ok(){
+	 window.location.href = getRootPath()+"/pages/pt/jd/pass.html";
+}
+
+function save_pass(){
+	
+	var passname = $("#passname").val();
+	var passnum = $("#passnum").val();
+	var passstar = $("#passstar").val();
+	
+	if(passname == ""){
+		layui_success("请输入关口名称"); 
+		return false;
+	}
+	
+	if(isPositiveInteger(passnum) == false){
+		layui_success("请输入第几关"); 
+		return false;
+	}
+	
+	if(isPositiveInteger(passstar) == false){
+		layui_success("请输入闯关星数"); 
+		return false;
+	}
+	
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/savepass.do",
+		  data:{"passid":passid,"passname":passname,"passnum":passnum,"passstar":passstar},
+		  dataType:"text",
+		  success:function(data){
+			    if(data=="200"){
+			    	success_ok();
+			    }else{
+			    	layui_success("第"+passnum+"关已存在！");
+			    }
+		  }
+	  });
+	
+	
+	 
+}
+
+function isPositiveInteger(s){//是否为正整数
+    var re = /^[0-9]+$/ ;
+    return re.test(s);
+}
+</script>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>竞答添加与修改</title>
+
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<!-- OLYCBjuz0sbCGabBGbk6EdXjnENCATEo -->
+
+<script type="text/javascript">
+
+
+	var paths = [  {
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/mess.css"
+	},{
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/font-awesome.min.css"
+	} ];
+
+	addFilesSRC(paths);
+
+	 var merid="1000";
+	 
+	
+</script>
+
+</head>
+
+<body style="background: #F1F1F2" id="bodyarea">
+	<div class="layui-container">
+
+		<div class="layui-row layui-form"
+			style="width: 100%;display: inline-block;">
+
+
+			<ul class="layui-timeline" id="allmodal" >
+				<li class="layui-timeline-item">
+					<div class="layui-timeline-content layui-text"></div></li>
+
+
+
+
+				<li class="layui-timeline-item"><i
+					class="layui-icon layui-timeline-axis" data="&#xe63c;">&#xe63c;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">竞答基本内容</h3>
+						<div class="layui-tab-item layui-show">
+
+
+
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>标题</label>
+								<div class="layui-input-block">
+									<input name="title"  autocomplete="off"
+										placeholder="请输入标题" lay-verify="required"
+										maxlength="30" class="layui-input width500" type="text"
+										id="title">
+										
+										<p class="info">不大于30个字符</p>
+								</div>
+							</div>
+							
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>竞答说明</label>
+								<div class="layui-input-block">
+									<textarea placeholder="请输入内容" lay-verify="required"
+										maxlength="512" class="layui-textarea width500" id="content"></textarea>
+								</div>
+							</div>
+							
+
+			   <div class="layui-form-item">
+								<label class="layui-form-label"><b class="red" >*</b>开始时间</label>
+								<div class="layui-input-block">
+									<input name="start_time"  autocomplete="off"
+										placeholder="请输入开始时间" class="layui-input width200" type="text"
+										readonly="readonly" id="start_time">
+										
+								</div>
+							</div>
+
+				
+							
+					<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red" >*</b>截止时间</label>
+								<div class="layui-input-block">
+									<input name="end_time"  autocomplete="off"
+										placeholder="请输入截止时间" class="layui-input width200" type="text"
+										readonly="readonly" id="end_time">
+										
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+
+<li class="layui-timeline-item"><i
+					class="layui-icon layui-timeline-axis" data="&#xe63c;">&#xe63c;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">竞答设置</h3>
+						<div class="layui-tab-item layui-show">
+
+
+
+							<div class="layui-form-item">
+							
+								<label class="layui-form-label"><b class="red">*</b>题目数量</label>
+								
+								<div class="layui-input-block">
+								
+									<input name="num"  autocomplete="off"
+										placeholder="请输入数量" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="num">
+										
+									
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>每题限时</label>
+								<div class="layui-input-block">
+									<input name="limittime"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="limittime"><p class="info">每题答题时间，单位：秒</p>
+										
+									
+								</div>
+							</div>
+							
+							
+							
+							
+							
+                         
+			  
+						
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>每题经验</label>
+								<div class="layui-input-block">
+									<input name="exp"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="exp">
+										
+									<p class="info">每答对一题获得经验</p>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>获胜每题积分</label>
+								<div class="layui-input-block">
+									<input name="eveScore"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="eveScore">
+										
+									<p class="info">获胜后，每答对一题获得积分</p>
+								</div>
+							</div>
+					<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>获胜得星</label>
+								<div class="layui-input-block">
+									<input name="star"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="star">
+										
+										
+									<p class="info">获胜后，获得星</p>
+								</div>
+							</div>
+							
+							
+							
+							
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>每题分数</label>
+								<div class="layui-input-block">
+									<input name="onescore"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="10" class="layui-input width200" type="text"
+										id="onescore">
+										
+									<p class="info">每答对一题获得最高分数，用于比较</p>
+								</div>
+							</div>
+							
+							<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>每题得分规则</label>
+								<div class="layui-input-block">
+									<input name="scoreRole"  autocomplete="off"
+										placeholder="请输入正整数" lay-verify="required"
+										maxlength="32" class="layui-input width200" type="text"
+										id="scoreRole">
+										<p class="info">每答对一题获得分数的规则，如：2:max|%|min:1,表示2秒内,最大得分，其他都是按比例折扣，最小分数1分</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+
+				
+
+
+
+				
+			</ul>
+
+
+		
+		</div>
+		<div class="layui-row" align="center"
+			style="margin-bottom: 50px;margin-top: 20px" id="workdo">
+			
+			
+			
+
+
+		</div>
+	</div>
+
+
+<div style="display:none" id="uploadppt"></div>
+</body>
+<script type="text/javascript">
+	var paths = [  {
+		type : "src",
+		path : "/assets/js/jquery-3.1.1.min.js"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.js"
+	}
+	, {
+		type : "src",
+		path : "/assets/utils/mess/jdutil.js",
+		version:2
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} 
+	
+	];
+
+	addFilesSRC(paths);
+</script>
+<script type="text/javascript">
+	var messobj={};
+	//商家id
+	messobj.merid=merid;
+	//编辑
+	var messid = GetQueryString("messid");
+	
+	
+
+</script>
+
+<script type="text/javascript">
+
+    var pptx="";
+	var  form, layer, element;
+	layui.use([ 'form', 'layer', 'element','laydate'], function() {
+		form = layui.form;
+		layer = parent.layer === undefined ? layui.layer : parent.layer;
+		element = layui.element;
+		
+		form.render();
+		
+		
+
+		$(function() {
+			$(".layui-timeline-axis,h3.layui-timeline-title").on("click",
+					function() {
+						var obj = $(this).closest("li");
+						var divobj = obj.find(".layui-tab-item");
+						divobj.toggleClass("layui-show");
+						if (divobj.hasClass("layui-show")) {
+							var o = obj.find(".layui-timeline-axis");
+							o.html(o.attr("data"));
+
+						} else {
+							obj.find(".layui-timeline-axis").html("&#xe60f;");
+						}
+
+					});
+			
+			
+			//编辑时
+			if (messid != null && messid != "") {
+				$.ajax({
+					type : "post",
+					url : getRootPath() + "/jd/ajaxOneJDByid.do",
+					data : {
+						id : messid
+					},
+					dataType : "json",
+					success : function(data) {
+						messobj=data;
+						showMess();
+					}
+				});
+
+			}else{
+				showMess();
+			}
+
+		});
+		
+		//选择截止日期时间
+		var laydate=layui.laydate;
+		laydate.render({
+		    elem: '#end_time',
+		    type: 'datetime'
+		  });
+		laydate.render({
+		    elem: '#start_time',
+		    type: 'datetime'
+		  });
+		
+		stertup_choose(form);
+		
+		
+		
+	});
+
+	
+</script>
+<script type="text/javascript" src="/ay/assets/login.js"></script>
+</html>

@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	
+    	<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0,user-scalable=no">
+       
+    	<link rel="stylesheet" href="http://192.168.0.108:8080/bi/assets/css/comm/common.css" />
+    	<link rel="stylesheet" href="http://192.168.0.108:8080/bi/assets/layui/css/layui.css" />
+    	<link rel="stylesheet" href="http://192.168.0.108:8080/bi/assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+    	<script type="text/javascript">
+    		var messid='20180522152859706010001';
+    	
+    	</script>
+</head>
+<body>
+	<div id="headdiv">
+	<a class='action_back' href="javascript :;" onClick="javascript :history.back(-1);">返回</a>
+		<h1 class='miu-title'>消息详情</h1>
+	</div>
+	
+	<div id="main">
+		<!--头部-->
+		<div class="head">
+			
+			
+			<div class="headtitle">
+				<h5>秦淮新开楼盘</h5>
+				
+				<p><b>楼盘发售</b><span>2018-05-22 15:28:59</span></p>
+			</div>
+		
+		
+		</div>
+		
+		<!--消息主体-->
+		<div class="content">
+			
+			<div class="imgs">
+				
+				
+				
+				
+				
+				
+							
+			</div>
+			
+			<div class="contentdiv">
+			
+				秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘秦淮新开楼盘
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		<div class="btns">
+			
+			
+			
+			
+			
+			<div  class="layui-btn layui-btn-sm layui-btn-primary  layui-btn-radius"><i class="layui-icon">&#xe600;</i>关注</div>
+			
+			
+			
+			
+			
+			
+			
+				
+			
+			
+			
+		</div>
+		
+		<div class="pjdiv">
+			<fieldset class="layui-elem-field layui-field-title" >
+ 	 	<legend><span>给个评价吧</span></legend>
+		</fieldset>
+		
+		<div class="pjarea">
+		
+			<div class="onearea" id="zanuser_num"><i class="layui-icon">&#xe6c6;</i> <b ></b></div>
+			
+			<div class="onearea" id="xquser_num"><i class="layui-icon">&#xe650;</i> <b>感兴趣</b></div>
+			<div class="onearea" id="xq2user_num"><i class="layui-icon">&#xe6af;</i> <b>有点意思</b></div>
+			<div class="onearea" id="blackuser_num"><i class="layui-icon">&#xe60f;</i> <b>拉黑</b></div>
+			<div class="onearea" id="storeuser_num"><i class="layui-icon">&#xe600;</i> <b>收藏</b></div>
+			
+		</div>
+		
+		
+		</div>
+		
+		
+		<div class="flagdivarea">
+			<fieldset class="layui-elem-field layui-field-title" >
+ 	 	<legend><span>标记了更方便查找</span></legend>
+		</fieldset>
+		
+		<div class="flagdiv">
+			<label>标记：</lable>
+			
+			<div class="oneflag flag1"><i class="layui-icon before">&#xe63f;</i><i class="layui-icon after">&#xe616;</i> </div>
+			<div class="oneflag  flag2"><i class="layui-icon before">&#xe63f;</i> <i class="layui-icon after">&#xe616;</i></div>
+			<div class="oneflag  flag3 checkon"><i class="layui-icon before">&#xe63f;</i> <i class="layui-icon after">&#xe616;</i></div>
+			
+			
+		</div>
+		
+		
+		</div>
+		
+		
+	</div>
+	
+	
+	<script type="text/javascript" src="http://192.168.0.108:8080/bi/assets/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="http://192.168.0.108:8080/bi/pages/app/userapp/js/userurl.js"></script>
+	<script type="text/javascript" src="http://192.168.0.108:8080/bi/assets/js/pc_mess/loadM.js"></script>
+	<script type="text/javascript" src="http://192.168.0.108:8080/bi/assets/js/pc_mess/afterSee.js"></script>
+	
+	
+ 
+  <div  id="jdloading">    
+    <div class="left"><div></div></div>
+    <div class="right"><div></div></div>
+    <div class="progress"><span>0</span></div>
+  </div>
+	
+	
+</body>
+</html>

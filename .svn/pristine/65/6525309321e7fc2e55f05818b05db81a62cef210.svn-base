@@ -1,0 +1,9 @@
+package com.hysm.service;
+
+import org.bson.Document;
+
+public interface adService {
+	
+	int save(Document doc);
+
+}

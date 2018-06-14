@@ -1,0 +1,78 @@
+// 模糊搜索
+	var likename = "";
+	$("#likename").val("");
+var bpath=getRootPath();
+var table=null;
+var state=99;//全部课程
+var json = {
+		elem : '#tablearea99',
+		
+		
+		cols : [ [ {
+			type : 'numbers',
+				width : '5%'
+		}, {
+			field : 'username',
+			width : '20%',
+			title : '姓名'
+		},{
+			field : 'exp',
+			width : '20%',
+			title : '经验',
+			style:'display:block;height:auto',
+			
+			
+		}, {
+			field : 'userscore',
+			title : '得分',
+			width : '10%',
+		},
+		
+		 {
+			field : 'star',
+			title : '加星',
+			width : '20%',
+		},
+		
+		 {
+				field : 'time',
+				title : '时间',
+				width : '30%',
+			}
+
+		 ] ],
+		page : true,
+		url : bpath + "/school/query.do",
+		where : {
+			likename : likename,
+			state:state
+		},
+		limit : 30
+	};
+layui.use([ 'form', 'layer', 'jquery', 'table','element' ], function() {
+	var form = layui.form, layer = parent.layer === undefined ? layui.layer
+			: parent.layer,element = layui.element;
+	
+	table= layui.table;
+
+	table.render(json);
+
+	$(".search_btn").on("click", function() {
+		var name =$("#likename").val();
+		 
+		if ($("#likename").val() != null && $("#likename").val().trim() != "") {
+			likename = $("#likename").val().trim();
+		}
+		json.where.likename = likename;
+		 
+		json.where.state=state;
+		json.elem="#tablearea"+state;
+		table.render(json);
+	});
+	
+	
+	
+	 
+
+});
+

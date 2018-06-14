@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>权限管理</title> 
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+
+
+<style type="text/css">
+.choose_page{height: 40px; border-bottom: 1px solid #dfdfdf;}
+.choose_page li{min-width: 65px; line-height: 40px; padding: 0px 15px; float: left; text-align: center;cursor: pointer;}
+.choose_act{color: #009688; border-bottom: 2px solid #009688;}
+</style>
+
+  </head>
+  
+  <body>
+    <body class="childrenBody" style="padding: 1%;">
+    <blockquote class="layui-elem-quote news_search" >
+		 <div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入用户名" class="layui-input search_input" id="name">
+		    </div>
+		    
+		    <a class="layui-btn layui-btn-mini search_btn" onclick="find();">查询</a>
+		</div> 
+		
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-mini layui-btn-normal"  onclick="add();">添加管理员</a>
+		</div>
+	 
+	</blockquote>
+	
+	<ul class="choose_page">
+		<li class="choose_act" onclick="choose_it(this);" data="100">全部</li> 
+	   <!--  <li onclick="choose_it(this);" data="1">管理员</li>
+	    <li onclick="choose_it(this);" data="0">用户</li> -->
+	</ul>
+	<br>
+	
+	<div> 
+	<div class="layui-form">
+	  <table class="layui-table">
+	    
+	    <thead>
+	      <tr>
+	      	<th>序号</th>
+	        <th>用户名</th>
+	        <th>联系方式</th>
+	        <th>状态</th>
+	        <th style="width: 14%;">操作</th>
+	      </tr> 
+	    </thead>
+	    <tbody id="tbody">
+	      
+	    </tbody>
+	  </table>
+	</div>
+	
+		<div style="margin-top: 20px; text-align: center;" id="page_div">
+		 	 
+		</div>
+	
+	</div>
+	
+	<br>
+	
+</body>
+<script type="text/javascript" src="/ay/assets/ui/libs/bower/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+
+var paths = [ 
+	{
+	type : "link",
+	path : "/assets/layui/css/layui.css"
+},{
+	type : "link",
+	path : "/assets/css/pc_mess/messlist.css"
+},{
+	type : "src",
+	path : "/assets/layui/layui.js"
+}
+,{
+	type : "src",
+	path : "/assets/login.js"
+
+} ];
+
+addFilesSRC(paths); 
+var bpath=getRootPath();
+var data;
+
+$(function () {
+	
+	query_data("100");
+});
+
+function set_table(list){
+	
+	if(list!= null && list.length > 0){ 
+		var html ="";
+		
+		for(var i=0;i<list.length;i++){
+			
+			var n=i+1;
+			
+			var a ="<button class='layui-btn layui-btn-primary layui-btn-sm' onclick='edit_it(this);' sid='"+list[i].name+"'>编辑</button>";
+			if(list[i].status=="管理员")
+			{
+				a =a+"<button class='layui-btn layui-btn-sm' onclick='free_it(this);' sid='"+list[i].name+"'>删除</button>";
+			}
+			
+			
+			var str = "<tr><td>"+n+"</td><td>"+list[i].name+"</td><td>"+list[i].phone+"</td><td>"+list[i].status+"</td><td>"+a+"</td><tr>";
+			
+			html = html+str;
+		}
+		
+		$("#tbody").html(html);
+		
+		
+	}else{
+		$("#tbody").html("<tr><td colspan='9'>暂无数据</td></tr>");
+	}
+	
+}
+
+function edit_it(obj){
+	
+	var name = $(obj).attr("sid");
+	 window.location.href = getRootPath()+"/pages/admin/setadmin.html?name="+name;
+}
+
+function free_it(obj) {
+	var name = $(obj).attr("sid");
+ 	UUID=get("UUID");
+	 
+	 $.ajax({
+        type : "POST",
+        dataType : "json",
+        url : "/ay/admin/delete.do",
+        data :{"uuid":UUID,"name":name},
+        success : function(ajaxDAO) {
+            if (ajaxDAO.success) {
+            	window.location.href = '/ay/admin/toPage.do';
+            }
+            else{
+            	alert(ajaxDAO.message);
+           }
+          
+        }
+    });
+}
+
+function add_it(obj){
+	var name = $(obj).attr("sid");
+	 UUID=get("UUID");
+	 
+	 $.ajax({
+        type : "POST",
+        dataType : "json",
+        url : "/ay/admin/auto.do",
+        data :{"uuid":UUID,"name":name},
+        success : function(ajaxDAO) {
+            if (ajaxDAO.success) {
+            	window.location.href = '/ay/admin/toPage.do';
+            }
+            else{
+            	alert(ajaxDAO.message);
+           }
+          
+        }
+    });
+}
+
+function find (){
+	var UUID=get("UUID");
+	var name=$("#name").val();
+	
+	
+	$.ajax({
+       type : "POST",
+       dataType : "json",
+       url : bpath + "/admin/search.do",
+       data : {"uuid":UUID,"name":name},
+       success : function(ajaxDAO) {
+           if (ajaxDAO.success) {
+        	   data=ajaxDAO.data;
+        	   set_table(data);
+           }
+         
+       }
+   });
+	
+}
+
+function add() {
+	
+	window.location.href = getRootPath()+"/pages/admin/setadmin.html";
+}
+
+function choose_it(obj){
+	$("li").removeClass("choose_act");
+	$(obj).addClass("choose_act");
+	
+	state = $(obj).attr("data");
+	 
+	query_data();
+}
+
+
+function query_data(state){
+	var UUID=get("UUID");
+	$.ajax({
+       type : "POST",
+       dataType : "json",
+       url : bpath + "/admin/admin.do",
+       data : {"uuid":UUID},
+       success : function(ajaxDAO) {
+           if (ajaxDAO.success) {
+        	   data=ajaxDAO.data;
+        	   set_table(data);
+           }
+         
+       }
+   });
+}
+</script>
+</html>

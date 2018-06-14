@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>发布课程</title>
+
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<!-- OLYCBjuz0sbCGabBGbk6EdXjnENCATEo -->
+<script type="text/javascript">
+
+	var paths = [  {
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/mess.css"
+	},{
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/font-awesome.min.css"
+	} ];
+
+	addFilesSRC(paths);
+
+	 var merid="1000";
+</script>
+
+<style type="text/css">
+.load_tc_back {
+	width:100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left: 0;
+	  z-index: 1001;
+	  overflow:hidden;
+	display:-webkit-flex;
+	-webkit-justify-content:center;
+	-webkit-align-items:center;
+	background:rgba(0,0,0,0.6);
+}
+
+.mp3show{ height: 40px; line-height: 40px;}
+.mp3show a{float: right; color: #308CE2;}
+
+.ump3{margin-bottom: 20px;
+    margin-left: 10px;}
+.fileinput-button {
+            position: relative;
+      display: inline-block;
+      overflow: hidden;
+  }
+
+  .fileinput-button input{
+      position:absolute;
+      right: 0px;
+      top: 0px;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      font-size: 200px;
+  }
+</style>
+
+</head>
+
+<body style="background: #F1F1F2" id="bodyarea">
+	<div class="layui-container">
+
+		<div class="layui-row layui-form"
+			style="width: 100%;display: inline-block;">
+
+
+			<ul class="layui-timeline" id="allmodal" >
+				<li class="layui-timeline-item">
+					<div class="layui-timeline-content layui-text"></div></li>
+
+
+
+
+				<li class="layui-timeline-item"><i
+					class="layui-icon layui-timeline-axis" data="&#xe63c;">&#xe63c;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">广告发布</h3>
+						<!-- <div class="layui-tab-item layui-show">
+
+						</div> -->
+						
+						<div class="layui-form-item">
+								<label class="layui-form-label"><b class="red">*</b>广告语</label>
+								<div class="layui-input-block">
+									<input name="title"  autocomplete="off"
+										placeholder="请输入广告语" lay-verify="required"
+										maxlength="30" class="layui-input width500" type="text"
+										id="title">
+										
+										<!-- <p class="info">不大于30个字符</p> -->
+								</div>
+							</div>
+					</div>
+				</li>
+			</ul>
+
+
+		
+
+		</div>
+		<div class="layui-row" align="center"
+			style="margin-bottom: 50px;margin-top: 20px" id="workdo">
+		</div>
+	</div>
+
+
+
+</div>
+ 
+</body>
+<script type="text/javascript">
+	var paths = [  {
+		type : "src",
+		path : "/assets/js/jquery-3.1.1.min.js"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.js"
+	},
+	/*****图片工具start****/
+	{
+		type : "link",
+		path : "/assets/imgutil/imgutil.css"
+
+	}, {
+		type : "src",
+		path : "/assets/imgutil/imgUtil.js"
+
+	}
+	, {
+		type : "src",
+		path : "/assets/utils/mess/choose.js",
+		version:2
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} 
+	
+	];
+
+	addFilesSRC(paths);
+</script>
+<script type="text/javascript">
+	var messobj={};
+	//商家id
+	messobj.merid=merid;
+	//编辑
+
+	
+	
+
+</script>
+
+<script type="text/javascript">
+
+    var pptx="";
+	var  form, layer, element,upload;
+	layui.use([ 'form', 'layer', 'element','laydate','upload'], function() {
+		form = layui.form;
+		layer = parent.layer === undefined ? layui.layer : parent.layer;
+		element = layui.element;
+		upload= layui.upload;
+		form.render();
+		
+		upload.render({
+		    elem: $("#uploadppt")
+		    ,url: getRootPath() + "/uploadppt/uploadPptx.do"
+		    ,accept: 'file' //普通文件
+		    ,exts: 'pptx' //只允许上传压缩文件
+		    ,done: function(res){
+		        
+		    	pptx=res.pptx;
+		    	
+		    	var arr=res.data;
+		    	$("#allmodal").append(addModalByPptx(arr));
+		    	
+		    	layer.closeAll();
+		    	
+		    },before:function(){
+		    	 layer.load(1, {
+		    		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+		    		});
+		    },error: function(){
+		    	
+		    	layer.closeAll();
+		    	layer.msg("上传异常");
+		    }
+		  });
+
+		$(function() {
+			$(".layui-timeline-axis,h3.layui-timeline-title").on("click",
+					function() {
+						var obj = $(this).closest("li");
+						var divobj = obj.find(".layui-tab-item");
+						divobj.toggleClass("layui-show");
+						if (divobj.hasClass("layui-show")) {
+							var o = obj.find(".layui-timeline-axis");
+							o.html(o.attr("data"));
+
+						} else {
+							obj.find(".layui-timeline-axis").html("&#xe60f;");
+						}
+
+					});
+			
+			var messid = GetQueryString("messid");
+			
+			//编辑时
+			if (messid != null && messid != "") {
+				$.ajax({
+					type : "post",
+					url : getRootPath() + "/advertise/query_id.do",
+					data : {
+						_id : messid
+					},
+					dataType : "json",
+					success : function(ajaxDAO) {
+						messobj=ajaxDAO.data;
+						showMess(messobj);
+					}
+				});
+
+			}else{
+				showMess(null);
+			}
+
+		});
+		
+	
+		
+		stertup_choose(form);
+		
+		
+		
+	});
+	
+	
+//-----------------
+
+	
+</script>
+<!-- <script type="text/javascript" src="/bi/assets/merchants_check.js"></script> -->
+</html>

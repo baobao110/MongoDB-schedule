@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>商家管理</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta name="description" content="商信" />
+		
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+
+<script type="text/javascript">
+	var paths = [
+	    
+	{
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},
+	    {
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/font-awesome.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/animate.css/animate.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/fullcalendar/dist/fullcalendar.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/perfect-scrollbar/css/perfect-scrollbar.css"
+	} , {
+		type : "link",
+		path : "/assets/ui/assets/css/bootstrap.css"
+	},{
+		type : "link",
+		path : "/assets/ui/assets/css/core.css"
+	},{
+		type : "link",
+		path : "/assets/ui/assets/css/app.css"
+	},{
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/gg1.css"
+	} 
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths);
+
+	
+	
+</script>
+       
+       
+
+    </head>
+
+
+    <body style="padding:0">
+    
+<div class="wrap">
+	<section class="app-content">
+		<!-- <div class="row">
+			<div class="col-md-6 col-sm-6">
+				<div class="widget p-md clearfix">
+					<div class="pull-left">
+						<h3 class="widget-title">课程</h3>
+						<small class="text-color">新增会员</small>
+					</div>
+					<span class="pull-right fz-lg fw-500 counter" data-plugin="counterUp">102</span>
+				</div>.widget
+			</div>
+
+			<div class="col-md-6 col-sm-6">
+				<div class="widget p-md clearfix">
+					<div class="pull-left">
+						<h3 class="widget-title">消息</h3>
+						<small class="text-color">访问量</small>
+					</div>
+					<span class="pull-right fz-lg fw-500 counter" data-plugin="counterUp">325</span>
+				</div>.widget
+			</div>
+		</div>.row
+ -->
+		<div class="row">
+			<div class="col-md-3 col-sm-6" onclick="showNum1()">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+						<div class="pull-left">
+							<h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp"></span>课程</h3>
+							<small class="text-color">共<span class="counter" data-plugin="counterUp" id="num1"></span>章</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-file"></i></span>
+					</div>
+					<footer class="widget-footer bg-primary" >
+						<small>查看</small>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[4,3,5,2,1], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div><!-- .widget -->
+			</div>
+			<div class="col-md-3 col-sm-6" onclick="showNum2()">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+						<div class="pull-left">
+							<h3 class="widget-title text-info"><span class="counter" data-plugin="counterUp"></span>题库</h3>
+							<small class="text-color">共<span class="counter" data-plugin="counterUp" id="num2"></span>道</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-file-text-o"></i></span>
+					</div>
+					<footer class="widget-footer bg-info">
+						<small>查看</small>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div><!-- .widget -->
+			</div>
+
+			<!--  <div class="col-md-3 col-sm-6">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+						<div class="pull-left">
+							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp"></span>学生</h3>
+							<small class="text-color">共<span class="counter" data-plugin="counterUp">158987</span>人</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-user-md"></i></span>
+					</div>
+					<footer class="widget-footer bg-danger">
+						<small>查看</small>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[1,2,3,5,4], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div>
+			</div> -->
+
+			<div class="col-md-3 col-sm-6" onclick="showNum3()">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+						<div class="pull-left">
+							<h3 class="widget-title text-success"><span class="counter" data-plugin="counterUp"></span>学校</h3>
+							<small class="text-color">共<span class="counter" data-plugin="counterUp" id="num3"></span>家</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-user-md"></i></span>
+					</div>
+					<footer class="widget-footer bg-success">
+						<small>查看</small>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[2,4,3,4,3], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div> 
+			</div>
+			
+			
+
+			<div class="col-md-3 col-sm-6" onclick="showNum4()">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+						<div class="pull-left">
+							<h3 class="widget-title text-warning"><span class="counter" data-plugin="counterUp"></span>学生</h3>
+							<small class="text-color">共<span class="counter" data-plugin="counterUp" id="num4"></span>人</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-user-md"></i></span>
+					</div>
+					<footer class="widget-footer bg-warning">
+						<small>查看</small>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div><!-- .widget -->
+			</div>
+			
+			
+		</div><!-- .row -->
+
+		
+		<div class="row">
+		
+			<div class="col-md-6 col-sm-6" onclick="targetLogin()">
+				<div class="widget p-md clearfix">
+					<div class="pull-left">
+						<h3 class="widget-title">学校注册入口</h3>
+						<small class="text-color">包含学校注册，学生录入</small>
+					</div>
+					
+						<span class="pull-right big-icon watermark" style="font-size:30px"><i class="fa fa-user-md"></i></span>
+				</div>
+			</div>
+
+			
+		</div>
+		
+
+		
+</section></div>
+  
+  </body>
+  <script type="text/javascript" src="/ay/assets/login.js"></script>
+  <script type="text/javascript">
+ 
+	
+	$(function(){
+		
+
+		$.ajax({
+			type : 'post',
+			url : getRootPath() + "/message/ajaxnums.do", 
+			dataType : "json", 
+			success : function(data) {
+				$("#num1").html(data.num1);
+				$("#num2").html(data.num2);
+				$("#num3").html(data.num3);
+				$("#num4").html(data.num4);
+
+			}
+
+		});
+		
+	});
+	
+	
+	function showNum1(){
+		
+		var pmobj=$(top.window.document);
+		   pmobj.find("span.menu-text").each(function(){
+			var text=$(this).text().trim();
+			if(text=="课程中心"){
+				$(this).closest(".has-submenu").addClass("open");
+				$(this).closest(".has-submenu").find("ul.submenu").css("display","block");
+				
+			}
+			if(text=="课程管理"){
+				$(this).closest("a").trigger("click");
+				top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+				return;
+			}
+			
+		});
+	}
+	
+function showNum2(){
+		
+		var pmobj=$(top.window.document);
+		   pmobj.find("span.menu-text").each(function(){
+			var text=$(this).text().trim();
+			if(text=="课程中心"){
+				$(this).closest(".has-submenu").addClass("open");
+				$(this).closest(".has-submenu").find("ul.submenu").css("display","block");
+				
+			}
+			if(text=="课程题库"){
+				$(this).closest("a").trigger("click");
+				top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+				return;
+			}
+			
+		});
+	}
+	
+function showNum3() {
+		var pmobj=$(top.window.document);
+		   pmobj.find("span.menu-text").each(function(){
+			var text=$(this).text().trim();
+			if(text=="学校管理"){
+				$(this).closest(".has-submenu").addClass("open");
+				$(this).closest(".has-submenu").find("ul.submenu").css("display","block");
+				
+			}
+			if(text=="全部学校"){
+				$(this).closest("a").trigger("click");
+				top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+				return;
+			}
+			
+		});
+}
+
+function showNum4() {
+	var pmobj=$(top.window.document);
+	   pmobj.find("span.menu-text").each(function(){
+		var text=$(this).text().trim();
+		if(text=="学校管理"){
+			$(this).closest(".has-submenu").addClass("open");
+			$(this).closest(".has-submenu").find("ul.submenu").css("display","block");
+			
+		}
+		if(text=="全部学生"){
+			$(this).closest("a").trigger("click");
+			top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+			return;
+		}
+		
+	});
+}
+	
+	
+	//学校注册页面
+function targetLogin(){
+		
+	parent.location.href = getRootPath()+"/pages/pt/sc/register.html";	
+}
+  </script>
+  
+  <script type="text/javascript" src="/ay/assets/login.js"></script>
+	
+  </html>

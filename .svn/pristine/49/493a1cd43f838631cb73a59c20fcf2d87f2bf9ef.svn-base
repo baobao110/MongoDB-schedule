@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>奥运知识竞答</title>
+		<link rel="stylesheet" href="css/animations.css" />
+		<link rel="stylesheet" href="css/pbindex.css?v=2" />
+		<link rel="stylesheet" href="js/layer_mobile/need/layer.css" />
+	</head>
+
+	<body>
+		<div id="loading">
+			<!--初始-->
+			<div class="single" id="loadfirst">
+
+				<img src="img/aylogo.png" id="logo" />
+				<em class="em1"> <em class="em2"> <em class="em3"></em></em>
+				</em>
+				<div class="textdiv"><b class="oneb username"></b><b class="oneb fromwhere"></b><b class="oneb  level"></b></div>
+
+			</div>
+			<!--用户匹配-->
+			<div id="pzpage">
+
+				<div id="qj2" class="qjdiv pt-page-FromLeft">
+					<div class="userinfo" id="myuser">
+						<img class="userimg" src="img/timg.jpg" />
+						<b class="name"></b>
+						<b class="from"></b>
+					</div>
+
+				</div>
+
+				<div id="qj1" class="qjdiv pt-page-FromRight">
+
+					<div class="userinfo" id="otheruser">
+						<img class="userimg" src="img/timg.jpg" />
+						<b class="name"></b>
+						<b class="from"></b>
+					</div>
+				</div>
+
+				<img src="img/title.png" class="pt-page-scaleUp pt-page-scaleBig" id="title" />
+
+			</div>
+
+			<!--	答题-->
+			<div id="main">
+				<div id="head">
+					<div id="leftdiv" class="user_info pt-page-FromLeft">
+						<div class="imgdiv"><img src="img/timg.jpg" /></div>
+						<b class="uname">用户</b>
+						<b class="uscore">0</b>
+					</div>
+
+					<div id="rightdiv" class="user_info pt-page-FromRight">
+						<div class="imgdiv"><img src="img/timg.jpg" /></div>
+						<b class="uname">用户</b>
+						<b class="uscore">0</b>
+
+					</div>
+					<div id="jdloading">
+						<div class="left">
+							<div></div>
+						</div>
+						<div class="right">
+							<div></div>
+						</div>
+						<div class="progress"><span>10</span></div>
+					</div>
+
+				</div>
+
+				<div id="bodyarea">
+					<div id="showIndex" class="pt-page-scaleUp pt-page-scaleBig">第<b></b>题</div>
+					<div id="iteminfo">
+						<div id="question"></div>
+						<div id="chooselist">
+							<div class="chooseone  pt-page-FromTop" onclick='chooseThisAnswer("A",this)' id="chooseA"><i class="myi"></i><i class="otheri"></i><span></span></div>
+							<div class="chooseone  pt-page-FromLeft" onclick='chooseThisAnswer("B",this)' id="chooseB"><i class="myi"></i><i class="otheri"></i><span></span></div>
+							<div class="chooseone  pt-page-FromRight" onclick='chooseThisAnswer("C",this)' id="chooseC"><i class="myi"></i><i class="otheri"></i><span></span></div>
+							<div class="chooseone  pt-page-FromBottom" onclick='chooseThisAnswer("D",this)' id="chooseD"><i class="myi"></i><i class="otheri"></i><span></span></div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!--结果-->
+			<div id="resarea">
+				<div id="head">
+					<div id="resleftdiv" class="user_info pt-page-FromLeft">
+						<div class="imgdiv"><img src="img/timg.jpg" /></div>
+						<b class="uname"></b>
+
+					</div>
+
+					<div id="resrightdiv" class="user_info pt-page-FromRight">
+						<div class="imgdiv"><img src="img/timg.jpg" /></div>
+						<b class="uname"></b>
+
+					</div>
+
+				</div>
+				<div id="headinfo"  >
+
+					<div id="headinfo_leftdiv" class="user_info pt-page-FromLeft">
+						<div class="scorediv"><b>0</b>分</div>
+						<b class="ucore">答对<em>0</em>题</b>
+
+					</div>
+
+					<div id="headinfo_rightdiv" class="user_info pt-page-FromRight">
+						<div class="scorediv"><b>0</b>分</div>
+						<b class="ucore">答对<em>0</em>题</b>
+
+					</div>
+<div class="resimg pt-page-scaleUp pt-page-scaleBig"></div>
+				</div>
+				
+				
+				<div id="catchdiv">
+					<div class="oneresdiv pt-page-FromLeft">
+						
+						<i class="jf"></i>
+						<b class="numshow" id="jfnum"></b>
+					</div>
+					<div class="oneresdiv pt-page-FromRight">
+						<i class="exp"></i>
+						<b class="numshow" id="expnum"></b>
+						
+					</div>
+				</div>
+				
+				<div id="resbtn">
+					<!--后续-->
+					<div id="tzbtn" class="btn pt-page-scaleUp pt-page-scaleBig" onclick="goStart()"></div>
+					
+					<div id="cancelbtn" class="btn pt-page-FromBottom" onclick="returnFirst()"></div>
+					
+				</div>
+				
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="js/zepto.js"></script>
+	<script type="text/javascript" src="js/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="js/loadM.js"></script>
+	<script type="text/javascript" src="js/main.js?v=2"></script>
+<script type="text/javascript" src="js/ajaxLogin.js"></script>
+</html>

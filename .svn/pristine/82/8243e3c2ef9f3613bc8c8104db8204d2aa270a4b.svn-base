@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>学校/学生注册</title>
+	
+    <meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<script type="text/javascript" src="/ay/assets/url.js"></script>
+	
+<script type="text/javascript">
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/messlist.css"
+	},{
+		type : "link",
+		path : "/assets/address/city-picker.css"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.all.js"
+	},{
+		type : "src",
+		path : "/assets/address/city-picker.data.js"
+	},{
+		type : "src",
+		path : "/assets/address/city-picker.js"
+	}];
+	
+	addFilesSRC(paths); 
+</script>
+
+<style type="text/css">
+.myhead{background: #308CE2; height: 60px; line-height: 60px; color: #fff; font-size: 18px; padding-left: 20px;}
+.mycontent{width: 640px; margin-left: auto; margin-right: auto; margin-top: 60px; background-color: #fff;border: 1px solid #d6d6d6; padding: 20px;}
+
+.myctitle{height: 40px;}
+.myctitle_left{width: 50%;float: left; line-height: 40px; }
+.myctitle_left h2{height: 40px;height: 40px; width: 120px;text-align: center;margin-left: auto; margin-right: auto; font-size: 20px;}
+
+.mychoosed{color: #308CE2; border-bottom: 2px solid #308CE2;}
+.mypage{padding: 40px 40px 0px 40px;}
+
+.input_border{ border-left: none;border-right: none; border-top: none; border-bottom: 1px solid #ccc;}
+#school_list div{height: 30px; line-height: 30px; cursor: pointer;}
+
+.fileinput-button {
+            position: relative;
+      display: inline-block;
+      overflow: hidden;
+  }
+
+  .fileinput-button input{
+      position:absolute;
+      right: 0px;
+      top: 0px;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      font-size: 200px;
+  }
+
+</style>
+	
+
+  </head>
+  
+
+  
+  <body style="background: #edf0f5;"> 
+   <div class="myhead">学校/学生注册</div>
+   
+   
+   
+   <div class="mycontent"> 
+    	<div class="myctitle">
+    		<div class="myctitle_left"><h2 onclick="choose_it(this);" class="mychoosed" kind="1">学校注册</h2></div>
+    		<div class="myctitle_left"><h2 onclick="choose_it(this);" kind="2">学生注册</h2></div>
+    		<div style="clear: both;"></div>
+    	</div>
+    	
+    	<div class="mypage" style="margin-top: 10px;">
+    		<div id="school_page"  >
+    			<div class="layui-form" >
+					 <div class="layui-form-item"> 
+					      <input type="text" id="schoolname" placeholder="请输入学校名称" class="layui-input input_border"> 
+			  		</div>
+			  		
+			  		 <div class="layui-form-item" style="position: relative;">  
+					     <input type="text" id="address" placeholder="请选择省/市/区县" class="layui-input"> 
+			  		</div>
+			  		
+			  		<div class="layui-form-item" style="text-align: center; margin-top: 20px;"> 
+				      <button class="layui-btn layui-btn-normal" style="width: 160px;" onclick="save_school()">立即注册</button> 
+				  	</div> 
+				</div>
+    		</div>
+    		<div id="student_page" style="display: none;">
+    			<div class="layui-form" >
+    				<form id="student_form">
+					 <div class="layui-form-item" style="text-align: right;"> 
+					      <input type="text" id="schoolcode" name="schoolcode" readonly="readonly" onclick="show_school();" placeholder="请选择学校编号" class="layui-input input_border"> 
+			  		</div>
+			  		
+			  		 <div class="layui-form-item" > 
+			  		 	<span class="layui-btn layui-btn-primary fileinput-button input_border" style="width: 100%; text-align: left; padding-left: 5px;">
+				            <span>上传文件</span>
+				            <input type="file" id="studentfile" name="studentfile">
+				        </span> 
+			  		</div>
+			  		 </form>  
+			  		<div class="layui-form-item" style="text-align: center; margin-top: 20px;"> 
+				      <button class="layui-btn layui-btn-normal" id="stu_button" style="width: 160px;" onclick="upload_student()">立即上传</button>
+				      <a style="margin-left: 20px;cursor: pointer;" onclick="download_file();">下载模板</a> 
+				  	</div>
+				  	<div id="stu_text" style="color: red;"></div> 
+				</div>
+    		</div>
+    	</div>
+    	
+    	
+    	 
+   </div>
+   
+   <input type="hidden" id="school_id" value="">
+   
+    
+  </body>
+<script type="text/javascript">
+$(function () {
+	$("#address").citypicker();
+});
+
+function choose_it(obj){
+	
+	var kind = $(obj).attr("kind");
+	
+	$("h2").removeClass("mychoosed");
+	$(obj).addClass("mychoosed");
+	
+	if(kind == 1){
+		$("#school_page").show();
+		$("#student_page").hide();
+	}else{
+		$("#school_page").hide();
+		$("#student_page").show();
+	}
+}
+
+
+function save_school(){
+	
+	var schoolname = $("#schoolname").val();
+	var school_id = $("#school_id").val();
+	
+	if(schoolname ==""){
+		layui_error("请输入学校名称");
+		return false;
+	}
+	
+	var address = $("#address").val();
+	
+	if(address==""){
+		layui_error("请选择学习所在地省/市/区县");
+		return false;
+	}
+	
+	var arr = address.split("/");
+	
+	if(arr.length == 0){
+		layui_error("请选择学习所在地省/市/区县");
+		return false;
+	}
+	
+	if(arr.length == 1){
+		layui_error("请选择学习所在地市/区县");
+		return false;
+	}
+	 
+	var province = arr[0];
+	var city = arr[1];
+	var county = "";
+	if(arr.length == 3){
+		 county = arr[2];
+	}
+	
+	
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/save_school.do",
+		  data:{"school_id":school_id,"schoolname":schoolname,"province":province,"city":city,"county":county},
+		  dataType:"json",
+		  success:function(data){
+			  
+			  if(data[0].back_code == 200){
+				  layui_success("学校注册成功！学校编号："+data[0].schoolcode);
+			  }else if(data[0].back_code == 300){
+				  layui_error("学校名称重复");
+			  }else{
+				  layui_error("提交失败");
+			  }
+			  
+		  }
+	  }); 
+}
+
+function layui_error(err){ 
+    layer.msg(err, {
+       time: 8000, //20s后自动关闭
+       id: 'LAY_layuierr',
+       btn: ["知道了"]
+     });
+}
+
+function layui_long(err){ 
+    layer.msg(err, {
+       //time: 8000, //20s后自动关闭
+       id: 'LAY_layuierr', 
+     });
+}
+
+function layui_success(s){ 
+    layer.msg(s, {
+       time: 8000, //20s后自动关闭
+       id: 'LAY_layuipro',
+       btn: ["知道了"]
+       ,success: function(layero){
+           var btn = layero.find('.layui-layer-btn');
+           btn.find('.layui-layer-btn0').attr({"onclick":"success_ok()"});
+         }
+
+     });
+}
+
+function success_ok() {
+	 window.location.href = getRootPath()+"/pages/pt/sc/register.html";
+}
+ 
+function show_school(){
+	
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/querySchool.do",
+		  data:{"page":1,"state":100,"schoolname":""},
+		  dataType:"json",
+		  success:function(data){
+			  
+			  if(data[0].list.length>0){
+				  
+				  var school_str = "";
+				  for(var i=0;i<data[0].list.length;i++){
+					  school_str = school_str+"<div onclick='choose_code(this);'  code='"+data[0].list[i].schoolcode+"' >"+data[0].list[i].schoolname+",编号"+data[0].list[i].schoolcode+"</div>"; 
+				  }
+				  
+				  var page_str ="";
+				  if(data[0].page_count > 1){
+						for(var i=1;i<=data[0].page_count;i++){ 
+							page_str=page_str+ "<button class='layui-btn layui-btn-primary layui-btn-sm' onclick='into_page(this);' p='"+i+"'>"+i+"</button>";
+							 
+						}
+				 }
+				  
+				  var html = "<div style='padding: 20px; background: #fff; max-height: 400px; overflow: auto;'>" 
+				   	+"<div class='layui-form-item'>"
+				   	+"<div style='width: 90%;float: left;'><input type='text' id='search_name' placeholder='请输入学校名称'  class='layui-input'></div>"
+				   	+"<div style='width: 10%;float: left;'><button class='layui-btn'  onclick='search()'>搜索</button></div>"
+				   	+"<div style='clear: both;'></div> "
+				   	+"<div id='school_list' style='margin-top:20px;'>"+school_str+" </div>"
+				   	+"<div id='page_list' style='text-align: center;'>"+page_str+" </div> </div> </div>";
+				   	
+				   	frist_show(html);
+			  }else{
+				  layui_error("暂无数据");
+			  }
+			  
+		  }
+	  });
+	
+	
+	 
+}
+
+function frist_show(html) {
+	//示范一个公告层
+    layer.open({
+      type: 1
+      ,title: '请选择学校编号' //不显示标题栏 
+      ,area: '700px;'
+      ,shade: 0.6
+      ,id: 'LAY_layuischool' //设定一个id，防止重复弹出 
+      ,btnAlign: 'c'
+      ,moveType: 1 //拖拽模式，0或者1
+      ,content: html
+       
+    });
+}
+
+function search(){
+	
+	var search_name = $("#search_name").val();
+	load_data(1,search_name);
+}
+
+function into_page(obj) {
+	
+	var mypage = $(obj).attr("p");
+	var search_name = $("#search_name").val();
+	load_data(mypage,search_name);
+}
+
+function load_data(p,n) {
+	
+	 $.ajax({
+		  type:"post",
+		  url:getRootPath()+"/school/querySchool.do",
+		  data:{"page":p,"state":100,"schoolname":n},
+		  dataType:"json",
+		  success:function(data){
+			  
+			  if(data[0].list.length>0){
+				  
+				  var school_str = "";
+				  for(var i=0;i<data[0].list.length;i++){
+					  school_str = school_str+"<div onclick='choose_code(this);'  code='"+data[0].list[i].schoolcode+"' >"+data[0].list[i].schoolname+",编号"+data[0].list[i].schoolcode+"</div>"; 
+				  }
+				  
+				  var page_str ="";
+				  if(data[0].page_count > 1){
+						for(var i=1;i<=data[0].page_count;i++){ 
+							page_str=page_str+ "<button class='layui-btn layui-btn-primary layui-btn-sm' onclick='into_page(this);' p='"+i+"'>"+i+"</button>";
+							 
+						}
+				  }
+				  
+				  $("#school_list").html(school_str);
+				  $("#page_list").html(page_str);
+				  
+				  
+			  }else{
+				  layui_error("暂无数据");
+			  }
+			  
+		  }
+	  });
+}
+
+function choose_code(obj){
+	
+	var code = $(obj).attr("code");
+	
+	$("#schoolcode").val(code);
+	
+	layer.closeAll();
+}
+
+function download_file(){
+	 window.location.href = getRootPath()+"/school/download_student.do";
+}
+
+function upload_student(){
+	
+	var schoolcode = $("#schoolcode").val();
+	
+	var studentfile = $("#studentfile").val();
+	
+	if(schoolcode == ""){
+		 layui_error("请选择学校编号");
+		 
+		 return false;
+	}
+	
+	if(studentfile == ""){
+		 layui_error("请上传excel文件"); 
+		 return false;
+	}
+	$("#stu_button").attr("disabled",true); 
+	$("#stu_text").text("正在上传，请稍等，请勿关闭本页！");
+	 
+	 var formData = new FormData($("#student_form" )[0]);
+
+	 $.ajax({
+			type:"post",
+	 		url: getRootPath() +"/school/upload_student.do",
+	 		dataType:"json",
+	 		data : formData,
+	 		cache: false,  
+			processData: false,  
+			contentType: false,
+	 		success: function(data){ 
+	 			
+	 			$("#stu_button").attr("disabled",false); 
+	 			
+	 			$("#stu_text").text("");
+	 			
+	 			if(data[0].back_code == 200){
+	 				layui_success("上传学生信息成功！"); 
+	 			}else if(data[0].back_code == 300){ 
+	 				var row = data[0].err_row+1;
+	 				layui_error("excel文件中第"+row+"行学生姓名必填");
+	 			}else if(data[0].back_code == 400){ 
+	 				var row = data[0].err_row+1;
+	 				layui_error("excel文件中第"+row+"行学号必填");
+	 			}else if(data[0].back_code == 450){ 
+	 				var row = data[0].err_row+1;
+	 				layui_error("excel文件中第"+row+"行学号必须为数字");
+	 			}else if(data[0].back_code == 500){ 
+	 				var row = data[0].err_row+1;
+	 				layui_error("excel文件中第"+row+"行班级必填");
+	 			}else if(data[0].back_code == 550){ 
+	 				var row = data[0].err_row+1;
+	 				layui_error("excel文件中第"+row+"行年级必填");
+	 			}else if(data[0].back_code == 600){  
+	 				layui_error("excel文件中学号重复。");
+	 			}else if(data[0].back_code == 100){  
+	 				layui_error("必须上传模板excel文件");
+	 			}else if(data[0].back_code == 150){  
+	 				layui_error("文件中请填写学生信息数据");
+	 			}else if(data[0].back_code == 700){
+	 				var studentid = data[0].studentid;
+	 				layui_error("学号："+studentid+"已存在。");
+	 			}    
+	 			
+	 			
+	 		}
+		 });
+}
+
+</script>
+</html>

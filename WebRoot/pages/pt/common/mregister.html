@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>用户注册</title>
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="Keywords" content="奥运机器人,学校注册,奥运,冬奥会,2022">
+    <meta name="Description" content="奥运机器人,学校注册,奥运,冬奥会,2022">
+    
+     <script type="text/javascript" src="/ay/assets/url.js"></script>
+     <script type="text/javascript">
+	/* var paths = [{
+		type : "link",
+		path : "/assets/ztree/css/zTreeStyle/zTreeStyle.css"
+	}];
+
+	addFilesSRC(paths);  */
+</script>
+
+<!--锁屏模板 end-->
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+	var paths2 = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "src",
+		path : "/assets/js/jquery.tips.js"
+	},{
+		type : "src",
+		path : "/assets/js/check.js"
+	}];
+
+	addFilesSRC(paths2);
+</script>
+
+<style type="text/css"> 
+
+body{margin: 0px; padding: 0px; background-image: url('/bi/assets/mlogin/img/bj.jpg'); background-size:100% 100%; background-repeat:no-repeat; background-attachment:fixed;}
+.reg_top{width: 100%;height: 100px;} 
+.info_box{width:700px; margin-left: auto;margin-right: auto; padding:20px 20px 5px 20px; background-color: #fff;border-radius: 4px;}
+.info_title{margin-left: 20px; height: 30px; line-height: 30px;}
+.info_r{width: 18px; height: 18px; border-radius: 10px; background-color: #3498E9;
+border: none; text-align:center; font-size: 14px; color: #fff; padding: 0px;}
+
+.info_line{width: 100%;}
+.info_a{width: 30%; float: left; height: 45px; line-height: 45px; text-align:right; color: #888;}
+.info_b{width: 70%; float: left; height: 45px; line-height: 45px; color: #888;}
+
+.info_input{width: 320px; height: 30px; border: 1px solid #ddd;border-radius: 4px; font-size: 14px;margin-left: 10px; padding-left: 10px; padding-right: 10px; }
+.info_check{width: 16px; height: 16px;margin-left: 10px; background-color: #fff;}
+
+.info_input2{width: 180px; height: 30px; border: 1px solid #ddd;border-radius: 4px; font-size: 14px;margin-left: 10px; padding-left: 10px; padding-right: 10px; }
+.code_but{width: 120px; height: 34px; border: 1px solid #ddd;border-radius: 4px; font-size: 14px;margin-left: 14px; background-color: #fff;color: #888;}
+.info_but{width: 100px; height: 32px; border-radius: 4px; border: none; background-color: #3498E9;color: #fff;}
+
+
+.agree_box{position: fixed; width: 700px;left:25%; top:120px; z-index: 1000;
+	margin: 0; padding: 0;  background-color: #fff; -webkit-background-clip: content;
+    border-radius: 2px;  box-shadow: 1px 1px 50px rgba(0,0,0,.3); }
+    
+.agree_body{width: 100%;max-height: 360px;  overflow-y: scroll;  }
+</style>
+  </head>
+   
+  <body>
+  
+  <div class="reg_top">
+  		
+  </div>
+  
+  
+  <div class="reg_body">
+  		<div class="info_box">
+  		 	<div class="info_title"><button class="info_r"></button>&nbsp;&nbsp;用户注册</div>
+  		 	<div class="info_line">
+  				<div class="info_a">姓名：：</div>
+  				<div class="info_b">
+  					<input type="text" id="name" maxlength="32" class="info_input">
+  				</div> 
+  				<div class="info_a">手机号：</div>
+  				<div class="info_b">
+  					 <input type="text" id="phone" maxlength="16" class="info_input">
+  				</div>
+  				<div class="info_a">登录密码：</div>
+  				<div class="info_b">
+  					 <input type="password" id="password" maxlength="24" class="info_input">
+  				</div>
+  				<div class="info_a">重新输入密码：</div>
+  				<div class="info_b">
+  					 <input type="password" id="password2" maxlength="24" class="info_input">
+  				</div>
+  				
+  				<div class="info_a" ></div>
+  				<div class="info_b" style="font-size: 14px;">
+  						<input type="checkbox" id="agree" value="1" class="info_check">
+  						&nbsp;<span style="cursor:pointer;" onclick="show_agree();">同意商信与合作企业或学校合作协议</span>
+  				</div> 
+  			</div>
+  			<div style="clear: both;"></div>
+  			<div class="info_line" style="text-align: center;margin-top: 10px;">
+  				<button class="info_but" id="reg_but" onclick="register();">注册</button>
+  			</div> 
+  		</div>
+  		
+  </div>
+   
+  
+  <!-- 协议 -->
+  <div id="agree_box" class="agree_box" style="display: none;">
+  		<div class="industry_head">
+	  		<label class="industry_head_txt">奥体与学校合作协议</label>
+	  		<label class="industry_head_close" onclick="close_agree();">×</label>
+  		</div>
+  		<div class="agree_body">
+	  		<div style="width: 94%;margin-left: 3%;margin-right: 3%; margin-top: 20px; margin-bottom: 20px; font-size: 14px; color: #888;">
+	  		 本节代码主要使用了Document对象关于窗口的一些属性，这些属性的主要功能和用法如下。
+	要得到窗口的尺寸，对于不同的浏览器，需要使用不同的属性和方法：若要检测窗口的真实尺寸，在Netscape下需要使用Window的属性；在IE下需要 深入Document内部对body进行检测；在DOM环境下，若要得到窗口的尺寸，需要注意根元素的尺寸，而不是元素。
+	Window对象的innerWidth属性包含当前窗口的内部宽度。Window对象的innerHeight属性包含当前窗口的内部高度。
+	Document对象的body属性对应HTML文档的标签。Document对象的documentElement属性则表示HTML文档的根节点。
+	document.body.clientHeight表示HTML文档所在窗口的当前高度。document.body. clientWidth表示HTML文档所在窗口的当前宽度。
+	网页可见区域宽： document.body.clientWidth 
+网页可见区域高： document.body.clientHeight 
+网页可见区域宽： document.body.offsetWidth (包括边线的宽) 
+网页可见区域高： document.body.offsetHeight (包括边线的高) 
+网页正文全文宽： document.body.scrollWidth 
+网页正文全文高： document.body.scrollHeight 
+网页被卷去的高： document.body.scrollTop 
+网页被卷去的左： document.body.scrollLeft 
+网页正文部分上： window.screenTop 
+网页正文部分左： window.screenLeft 
+屏幕分辨率的高： window.screen.height 
+屏幕分辨率的宽： window.screen.width 
+屏幕可用工作区高度： window.screen.availHeight 
+屏幕可用工作区宽度： window.screen.availWidth 
+
+HTML精确定位:scrollLeft,scrollWidth,clientWidth,offsetWidth 
+scrollHeight: 获取对象的滚动高度。 
+scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 
+scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 
+scrollWidth:获取对象的滚动宽度 
+offsetHeight:获取对象相对于版面或由父坐标 offsetParent 属性指定的父坐标的高度 
+offsetLeft:获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置 
+offsetTop:获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置 
+event.clientX 相对文档的水平座标 
+event.clientY 相对文档的垂直座标 
+event.offsetX 相对容器的水平坐标 
+event.offsetY 相对容器的垂直坐标 
+document.documentElement.scrollTop 垂直方向滚动的值 
+event.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量 
+	  		</div> 
+  		</div>
+  		<div class="industry_foot">
+  		<button class="industry_sure" onclick="agree_it();">同意</button>
+  	</div>
+  </div>
+ 
+<script type="text/javascript" src="/ay/assets/ui/libs/bower/jquery/dist/jquery.js"></script> 
+<script type="text/javascript">
+  
+function show_agree(){
+	
+	var w = document.body.clientWidth;
+	
+	var ww = (w-700)/2;
+	
+	$("#agree_box").css("left",ww+"px");
+	
+	$("#agree_box").show();
+}
+
+function close_agree() {
+	$("#agree_box").hide();
+}
+
+function agree_it(){
+	$("#agree").attr("checked",true);
+	$("#agree_box").hide();
+}
+ 
+	
+function register(){ 
+	var name = $("#name").val().trim();
+	var phone = $("#phone").val().trim();
+	var password = $("#password").val().trim();
+	var password2 = $("#password2").val().trim();
+	
+	$("#reg_but").attr("disabled",true);
+	
+	var agree = document.getElementById("agree").checked;
+	 
+	if(agree == false){
+		$("#reg_but").attr("disabled",false);
+		error_show("#agree","请同意相关协议！");
+		return false;
+	}
+	
+	
+	$.ajax({
+		type:"post",
+  		url: getRootPath() +"/admin/register.do",
+  		dataType:"json",
+  		data:{"name":name,"phone":phone,"password":password,"password2":password2 },
+  		success: function(ajaxDAO){
+  			
+  			if(ajaxDAO.success){
+  				
+  				location.href = getRootPath()+"/pages/pt/common/login.html"; 
+  				
+  			}else {
+  				alert(ajaxDAO.message);
+  			}
+  		}
+	});
+	
+}
+	
+</script>
+</body>
+</html>

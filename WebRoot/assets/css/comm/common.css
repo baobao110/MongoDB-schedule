@@ -1,0 +1,442 @@
+body,h1,h2,h3,h4,h5{
+	padding:0;
+	margin:0;
+	font-weight:normal;
+	font-family:"微软雅黑";
+}
+*{
+	
+	-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;
+	outline: none;-moz-appearance:none;  -webkit-appearance:none;
+}
+.clearfix{
+	clear: both;
+}
+body{
+	background: #F0F0F0;
+}
+.clearfix{
+	clear:both;
+}
+#headdiv{
+	width:100%;
+	margin:auto auto;
+	height:50px;
+	background:#FFFFFF;
+	border-bottom: 1px solid #f0f0f0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	vertical-align: middle;
+	z-index: 99999999;
+	
+}
+#headdiv .action_back{
+	width:60px;
+	padding-left: 22px;
+	background: url(return.png) center no-repeat;
+	background-position: 10%;
+	background-size: 15px;
+	
+	position: absolute;
+	top:0;
+	left:0;
+	font-size:15px;
+	line-height:50px;
+	vertical-align: middle;
+}
+#headdiv .miu-title{
+	text-align:center;
+	width:100%;
+	float: left;
+	display:inline-block;
+	font-size:18px;
+	line-height:50px;
+}
+#headdiv  .action_sx{
+	width:49px;
+	padding-right: 10px;
+	background: url(jt.png) center no-repeat;
+	background-position: 88%;
+	background-size: 18px;
+	
+	position: absolute;
+	top:0;
+	right:0;
+	font-size:16px;
+	line-height:50px;
+	vertical-align: middle;
+}
+
+/*主体*/
+#main{
+	width:100%;
+	position: relative;
+	margin-top: 50px;
+	height:auto;
+	background: #FFFFFF;
+	margin-bottom: 60px;
+	padding-bottom: 20px
+}
+/*消息头部*/
+#main .head{
+	height:70px;
+	vertical-align: middle;
+	width: 94%;
+	margin-left: 3%;
+	line-height: 70px;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+#main .head .logo{
+	
+	width: 22%;
+	max-width: 70px;
+	height: 70px;
+	
+	display: inline-block;
+	line-height: 70px;
+	
+	text-align: center;
+	
+	vertical-align: middle;
+	float: left;
+}
+#main .head .logo .logoimg{
+	border-radius: 25px;
+	width:50px;
+	height:50px;
+	
+	display: block;
+	line-height: 50px;
+	overflow: hidden;
+	text-align: center;
+	
+	margin-top: 10px;
+}
+#main .head .logo img {
+	
+	width:50px;
+	height:50px;
+	display: inline-block;
+}
+
+#main .head .headtitle{
+	float: left;
+	width: 75%;
+	height: 70px;
+	
+	display: inline-block;
+	overflow: hidden;
+	margin-left: 2%;
+	text-align: left;
+	line-height: 35px;
+}
+
+#main .head .headtitle h5{
+	
+	color:#333;
+	font-size: 16px;
+	font-weight: 600;
+	
+}
+#main .head .headtitle p{
+	color:#888;
+	font-size: 12px;
+	font-weight: 400;
+	position: relative;
+	margin: 0;
+}
+
+#main .head .headtitle p b{
+	
+	max-width: 50%;
+	color: #1da1f4;
+	overflow: hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#main .head .headtitle p span{
+	
+	max-width: 40%;
+	overflow: hidden; text-overflow:ellipsis; white-space:nowrap;
+	margin-left: 10%;
+}
+/**消息内容**/
+#main .content{
+	vertical-align: middle;
+	width: 94%;
+	margin-left: 3%;
+	line-height: 25px;
+	display: inline-block;
+	font-size: 14px;
+	color:#666
+}
+/**按钮**/
+#main .btns{
+	vertical-align: middle;
+	width: 94%;
+	margin-left: 3%;
+	line-height: 25px;
+	display: inline-block;
+	font-size: 14px;
+	color:#333;
+	margin-top: 20px;
+}
+#main .btns .layui-btn{
+	
+	min-width:50px;
+	display: inline-block;
+	margin: 0;
+	margin-right: 10px;
+	margin-top: 10px;
+	text-align: left;
+}
+#main .btns .layui-btn.checkon{
+	border:1px solid orangered;
+	color: orangered;
+}
+/**评价**/
+#main .pjdiv{
+	vertical-align: middle;
+	width: 94%;
+	margin-left: 3%;
+	line-height: 25px;
+	display: inline-block;
+	font-size: 14px;
+	color:#333;
+	margin-top: 20px;
+}
+
+#main .pjdiv legend span{
+	font-size: 15px;
+	color: #999;
+}
+#main .pjdiv .pjarea{
+	width: 100%;
+	
+}
+#main .pjdiv .pjarea .onearea{
+	
+	display: inline-block;
+	margin-right: 10px;
+	margin-top: 10px;
+	min-width: 50px;
+	text-align: center;
+	color: #555;
+	
+}
+#main .pjdiv .pjarea .onearea.checkon{
+	color: #1da1f4;
+}
+#main .pjdiv .pjarea .onearea b{
+	font-weight: 400;
+}
+/**标记**/
+#main .flagdivarea{
+	
+	vertical-align: middle;
+	width: 94%;
+	margin-left: 3%;
+	line-height: 25px;
+	display: inline-block;
+	font-size: 14px;
+	color:#333;
+	margin-top: 20px;
+	margin-bottom: 80px;
+}
+#main .flagdivarea legend span{
+	font-size: 15px;
+	color: #999;
+}
+.flagdiv{
+	
+	width: 100%;
+}
+.flagdiv label{
+	
+	font-size: 18px;
+}
+.flagdiv .oneflag{
+	
+	display: inline-block;
+	margin-left: 20px;
+	width: 40px;
+}
+.flagdiv .oneflag .layui-icon{
+	font-size: 20px;
+	font-weight: 700;
+}
+.flagdiv .oneflag.flag1{
+	color:#1da1f4
+}
+.flagdiv .oneflag.flag2{
+	color:#FD5856
+}
+.flagdiv .oneflag.flag3{
+	color:#FFA42F
+}
+.flagdiv .oneflag .layui-icon.after{
+	
+	display: none;
+}
+.flagdiv .oneflag .layui-icon.before{
+	
+	display: inline-block;
+}
+.flagdiv .oneflag.checkon .layui-icon.after{
+	
+	display: inline-block;
+	
+}
+.flagdiv .oneflag.checkon .layui-icon.before{
+	
+	display: none;
+}
+
+
+/***加载滚动***/
+ #jdloading{position: fixed; width: 5em; height: 5em; display: inline-block;right: 10px; bottom: 60px;border-radius: 2.5em;
+ background: #C2C2C2;
+  -moz-box-shadow:0px 0px 20px  rgba(29,161,244,0.3); -webkit-box-shadow:0px 0px 20px  rgba(29,161,244,0.3); box-shadow:0px 0px 20px rgba(29,161,244,0.3);
+ }
+ #jdloading .progress{position: absolute; width: 4em; height:4em;
+  background-color: #C2C2C2;
+/* background: transparent;*/
+ color:#000; border-radius: 50%; left: 0.5em; top: 0.5em; line-height: 4em; text-align: center;
+ 
+ 
+  }
+   
+      #jdloading .progress span sm{
+      		font-size: 12px;
+   
+   		width:35px;
+   		display: inline-block;
+   		
+      }
+      
+   #jdloading .progress span{ font: 15px/2em Arial;	word-break: break-all; word-wrap:break-word;
+   		width:40px;
+   		text-align: center;
+   		line-height: 1.5em;
+   			display: inline-block;
+   			margin-top: 0.5em;
+   		}
+  #jdloading  .left,.right{width: 2.5em;height: 5em;overflow: hidden; position: relative; float: left;}
+  #jdloading  .left{ border-radius: 5em 0 0 5em;}
+  #jdloading  .right{ border-radius: 0 5em 5em 0;}
+  #jdloading  .left div,.right div{content:"";  position:absolute; display:block; width: 2.5em;height: 5em; background-color: white;border-radius:5em 0 0 5em; transition:all .3s; transform-origin:right center; transform:rotateZ(-180deg);}
+  #jdloading  .right div{content:"";  position:absolute; display:block;   border-radius: 0 5em 5em 0;transform-origin:left center; }
+  
+  #jdloading .left div,#jdloading .right div{
+  	 opacity:0.8;
+    background-color: #1da1f4;
+    display: block;
+    border: none;
+  
+   
+  }
+  /**提示**/
+a.regeditTitle{
+	
+	font-size: 11px;
+	position: relative;
+	width: 100%;
+	text-align: center;
+	margin-top: 100px;
+	
+	
+	text-shadow: 1px 2px 3px rgba(67,8,7,0.5); 
+color:#188AE2;
+                display: block;
+	
+}
+
+/*页脚菜单*/
+.foot-nav{
+	width:100%;
+	background:#fff;
+	position:fixed;
+	bottom:0;
+	border-top:0.6px solid #e6e7eb;
+	padding-top:6px;
+}
+.foot-nav .cont{
+	float:left;
+	width:20%;
+}
+.foot-nav  .img{
+	width:40%;
+	height: 20px;
+	display: inline-block;
+	margin-left: 30%;
+	position: relative;
+}
+.foot-nav .cont h1{ 
+	text-align:center;
+	color:#999;
+	font-size:10px;
+	line-height:16px;
+}
+.foot-nav .cont a{
+	
+	text-decoration: none;
+}
+.foot-nav .cont.checkon h1{
+	text-align:center;
+	color:#1da1f4;
+	font-size:10px;
+	line-height:16px;
+}
+
+
+.foot-nav .cont .img1{
+	
+	background: url(bm/first-gray.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont.checkon .img1{
+	
+	background: url(bm/first-blue.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont .img2{
+	
+	background: url(bm/secend-gray.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont.checkon .img2{
+	
+	background: url(bm/secend-blue.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont .img3{
+	
+	background: url(bm/third-gray.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont.checkon .img3{
+	
+	background: url(bm/third-blue.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont .img4{
+	
+	background: url(bm/forth-gray.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont.checkon .img4{
+	
+	background: url(bm/forth-blue.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont .img5{
+	
+	background: url(bm/fifth-gray.png) center no-repeat;
+	background-size:20px 20px ;
+}
+.foot-nav .cont.checkon .img5{
+	
+	background: url(bm/fifth-blue.png) center no-repeat;
+	background-size:20px 20px ;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>瀛︽牎绠＄悊</title>
+	
+  <meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+
+/* check(); */
+
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/messlist.css"
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths);
+	 var merid="1000";
+	
+</script>
+
+  </head>
+  
+  <body class="childrenBody" style="padding: 1%;">
+	<blockquote class="layui-elem-quote news_search" >
+		 <div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="璇疯緭鍏ュ鏍″悕绉�鍏抽敭瀛� class="layui-input search_input" id="likename">
+		    </div>
+		    
+		    <a class="layui-btn layui-btn-mini search_btn" >鏌ヨ</a>
+		</div> 
+		
+		
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-mini layui-btn-normal"  onclick="addTm()">娣诲姞瀛︽牎</a>
+		</div>
+	
+		
+		
+	</blockquote>
+	
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+  <ul class="layui-tab-title">
+ 	<li class="layui-this" data="99">鍏ㄩ儴</li>
+    
+    <li data="1">鏈夋晥</li>
+    <li data="-99">宸插喕缁�/li>
+    
+  
+  </ul>
+  <div class="layui-tab-content"  >
+    <div class="layui-tab-item layui-show">
+    		<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea99" lay-filter="tablearea99"></table>
+			</div>
+    
+    </div>
+    
+    <div class="layui-tab-item" >
+    		<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea1" lay-filter="tablearea1"></table>
+			</div>
+    
+    
+    </div>
+   
+    <div class="layui-tab-item" >
+    			<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea-99" lay-filter="tablearea-99"></table>
+			</div>
+    
+    
+    </div>
+  </div>
+</div> 
+	
+	
+	
+
+
+	<script type="text/javascript">
+	var paths = [ {
+		type : "src",
+		path : "/assets/layui/layui.js"
+	},{
+		type : "src",
+		path : "/assets/js/pc_mess/userlist.js"
+	} ];
+
+	addFilesSRC(paths);
+	
+	//鍒涘缓绔炵瓟
+	function addTm(){
+		var pmobj=$(top.window.document);
+		   pmobj.find("span.menu-text").each(function(){
+			var text=$(this).text().trim();
+			if(text=="娣诲姞棰樼洰"){
+				$(this).closest("a").trigger("click");
+				top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+				return;
+			}
+			
+		});
+	}
+	
+	
+	
+	
+</script>
+
+
+
+	
+
+<!-- 鏈夋晥鏈�-->
+<script type="text/html" id="ctimestr">
+  
+
+ <span style="color: #F581B1;">{{ d.ctimestr.substring(0,10)}}</span>
+  
+
+	
+
+</script>
+
+
+<script type="text/html" id="tmdetail">
+  
+
+ <span style="color: #F581B1;font-size:18px">{{ d.title}}</span><br>
+  <span style="color: #F581B1;">{{ d.content}}</span><br>
+  <span style="color: #F581B1;">鑰冮鎬绘暟:{{ d.num}}</span><br>
+ <span style="color: #F581B1;">姣忛闄愭椂:{{ d.limittime}}绉�/span><br>
+<span style="color: #F581B1;">姣忛鍒嗗�:{{ d.tmvalue}}</span><br>
+
+
+</script>
+
+<!-- {{#  if(d.state == 1){ }}
+    <div class="layui-btn layui-btn-danger layui-btn-sm">鍐荤粨</div>
+  {{#  } else { }}
+      <div class="layui-btn layui-btn-warm layui-btn-sm">浣跨敤</div>
+  {{#  } }} -->
+<script type="text/html" id="dowork">
+  
+  {{#  if(d.state == 1){ }}
+    <div class="layui-btn layui-btn-danger layui-btn-sm"  onclick="updateTMState('{{d._id}}',-99)">鍋滄</div>
+  {{#  } else { }}
+      <div class="layui-btn layui-btn-warm layui-btn-sm"  onclick="updateTMState('{{d._id}}',1)">鎭㈠</div>
+
+  {{#  } }}
+
+
+ <div class="layui-btn layui-btn-normal layui-btn-sm" onclick="editTM('{{d._id}}')">淇敼</div>
+  
+
+	
+
+</script>
+<!-- <script type="text/javascript" src="/bi/assets/merchants_check.js"></script> -->
+</body>
+  
+</html>

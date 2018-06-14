@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <title>商户登录</title>
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="Keywords" content="商信登录,商信,商户登录">
+    <meta name="Description" content="商信登录,商信,商户登录">
+    
+    <script type="text/javascript" src="/bi/assets/url.js"></script>
+<script type="text/javascript">
+	var paths = [{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/mlogin/css/base.css"
+	}, {
+		type : "link",
+		path : "/assets/mlogin/css/iconfont.css"
+	}, {
+		type : "link",
+		path : "/assets/mlogin/css/reg.css"
+	}];
+
+	addFilesSRC(paths); 
+</script>
+
+<!--锁屏模板 end-->
+<script type="text/javascript">
+	var paths2 = [{
+		type : "src",
+		path : "/assets/js/jquery-3.1.1.min.js"
+	},{
+		type : "src",
+		path : "/assets/layui/layui.js"
+	},{
+		type : "src",
+		path : "/assets/remove_token.js"
+	},{
+		type : "src",
+		path : "/assets/js/check.js"
+	}];
+
+	addFilesSRC(paths2);
+</script>
+<style type="text/css">
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+ /* WebKit browsers */   
+color: #ddd; font-size: 16px;  
+}   
+input:-moz-placeholder, textarea:-moz-placeholder {   
+/* Mozilla Firefox 4 to 18 */   
+color: #ddd; font-size: 16px;   
+}   
+input::-moz-placeholder, textarea::-moz-placeholder {   
+ /* Mozilla Firefox 19+ */   
+color: #ddd; font-size: 16px;   
+}   
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {   
+ /* Internet Explorer 10+ */   
+color: #ddd; font-size: 16px;   
+} 
+
+input {
+	font-size: 18px;
+}
+
+</style>
+  </head>
+  
+  <body>
+   <div id="ajax-hook"></div>
+<div class="wrap">
+    <div class="wpn">
+        <div class="form-data pos">
+            <a href=""><img src="/bi/assets/mlogin/img/logo.png" class="head-logo"></a>
+            <div class="change-login">
+                <p class="account_number on">密码登录</p>
+                <p class="message">短信登录</p>
+            </div>
+            <div class="form1">
+                <p class="p-input pos"> 
+                    <input type="text" placeholder="请输入手机号" maxlength="16" id="num">
+                    <span class="tel-warn num-err hide"><em>手机号错误，请重新输入</em><i class="icon-warn"></i></span>
+                </p>
+                <p class="p-input pos"> 
+                    <input type="password" placeholder="请输入密码" maxlength="24" id="pass">
+                    <span class="tel-warn pass-err hide"><em>密码错误，请重新输入</em><i class="icon-warn"></i></span>
+                </p>
+                
+                 <button class="lang-btn off log-btn" id="login1" style="background-color: #42a5f5;color: #fff;" onclick="login_pass();" >登录</button>
+                 
+            </div>
+            <div class="form2 hide">
+                <p class="p-input pos"> 
+                    <input type="number" placeholder="请输入手机号"  maxlength="16" id="num2">
+                    <span class="tel-warn num2-err hide"><em>手机号错误，请重新输入</em><i class="icon-warn"></i></span>
+                </p>
+                <p class="p-input pos"> 
+                    <input type="number" placeholder="输入验证码"  maxlength="8" id="code">
+                    <a href="javascript:;" class="send" onclick="send_code();">发送验证码</a>
+                    <span class="time hide"><em>120</em>S</span>
+                    <span class="tel-warn error hide"><em>验证码错误</em><i class="icon-warn"></i></span>
+                </p>
+                
+                 <button class="lang-btn off log-btn" id="login2" style="background-color: #42a5f5;color: #fff;" onclick="login_code();">登录</button>
+                
+            </div>
+           <!--  <div class="r-forget cl">
+                <a href="./reg.html" class="z">账号注册</a>
+                <a href="./getpass.html" class="y">忘记密码</a>
+            </div> -->
+           
+             
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+var $, form, layer,element;
+layui.use([ 'form', 'layer','element' ], function() {
+	form = layui.form;
+	layer = parent.layer === undefined ? layui.layer : parent.layer;
+ 
+	element = layui.element;
+	form.render();
+ 
+});
+//var tab = 'account_number';
+
+$(function(){
+	
+	// 选项卡切换
+	$(".account_number").click(function () {
+		$('.tel-warn').addClass('hide');
+		//tab = $(this).attr('class').split(' ')[0];
+		 
+        $(this).addClass("on");
+        $(".message").removeClass("on");
+        $(".form2").addClass("hide");
+        $(".form1").removeClass("hide");
+    });
+	// 选项卡切换
+	$(".message").click(function () {
+		$('.tel-warn').addClass('hide');
+		//tab = $(this).attr('class').split(' ')[0];
+		 
+		$(this).addClass("on");
+        $(".account_number").removeClass("on");
+		$(".form2").removeClass("hide");
+		$(".form1").addClass("hide");
+		
+    });
+ 
+});
+
+function login_pass(){
+	 
+	var phone = $("#num").val().trim();
+	var password = $("#pass").val().trim();
+	$("#login1").attr("disabled",true);
+	
+	if(phone=="" || isPhone(phone) == false){
+		$("#login1").attr("disabled",false);
+		$(".num-err").removeClass("hide");
+		return false;
+	}else{
+		$(".num-err").addClass("hide");
+	}
+	
+	if(password ==""){
+		$("#login1").attr("disabled",false);
+		 $(".pass-err").html("<em>密码错误，请重新输入</em><i class='icon-warn'></i>");
+		 $(".pass-err").removeClass("hide");
+		return false;
+	}else{
+		 $(".pass-err").addClass("hide");
+	}
+	
+	if(checkpass(password) == false || password.length < 6){
+		$("#login1").attr("disabled",false);
+		 $(".pass-err").html("<em>密码必须6-24位数字或字母</em><i class='icon-warn'></i>");
+		 $(".pass-err").removeClass("hide"); 
+		return false;
+	}else{
+		 $(".pass-err").addClass("hide");
+	}
+	
+	$.ajax({
+		type:"post",
+  		url: getRootPath() +"/sjinfo/login_password.do",
+  		dataType:"json",
+  		data:{"phone":phone,"password":password},
+  		success: function(data){
+  			
+  			if(data.back_code == 200){
+  				 
+  				var obj = {"id":data.id,"phone":phone,"token":data.token};
+  				var str =JSON.stringify(obj); 
+  				setCookie(Merchants_Cookie,str);
+  				location.href = getRootPath()+"/pages/sjpc/merindex.html"; 
+  				
+  			}else if(data.back_code == 404){
+  				$("#login1").attr("disabled",false);
+  				layui_error("您的手机号尚未注册！");
+  			}else if(data.back_code == 100){
+  				$("#login1").attr("disabled",false);
+  				layui_error("登录密码错误！");  
+  			}else if(data.back_code == 300){
+  				$("#login1").attr("disabled",false);
+  				layui_error("登录密码错误！");
+  			}else if(data.back_code == 500){
+  				$("#login1").attr("disabled",false);
+  				layui_error("此账号已冻结！");
+  			} 
+  		}
+	}); 
+}
+if (window != top) {
+	top.location.href = location.href;
+}
+
+var has_send = 0;
+
+function send_code(){ 
+	
+	var phone = $("#num2").val().trim(); 
+	if(phone=="" || isPhone(phone) == false){ 
+		$(".num2-err").removeClass("hide");
+		return false;
+	}else{
+		$(".num2-err").addClass("hide");
+	}
+	
+	if(has_send == 0){
+		 
+		has_send = 1;
+		
+		$.ajax({
+			type:"post",
+	  		url: getRootPath() +"/sjinfo/send_login_code.do",
+	  		dataType:"json",
+	  		data:{"phone":phone},
+	  		success: function(data){
+	  			 
+	  			if(data.back_code == 200){
+	  				 
+	  				setInterval(i);
+					var num = 120;
+					$(".time").html("<em>120</em>S");
+					$(".send").addClass("hide"); 
+					$(".time").removeClass("hide");
+					 
+					var i = setInterval(function() {
+					 	if(num > 0){
+					 		num--; 
+					 		$(".time").html("<em>"+num+"</em>S");
+					 	}else{
+					 		clearInterval(i);
+					 		has_send = 0;
+					 		$(".send").html("重新发送");
+					 		$(".send").removeClass("hide");
+							$(".time").addClass("hide");
+					 		    
+					 	}
+			              
+			        }, 1000);
+	  				 
+	  			}else if(data.back_code == 404 || data.back_code == 400){
+	  				has_send = 0;
+	  				layui_error("您的手机号尚未注册！"); 
+	  			}else if(data.back_code == 500){
+	  				has_send = 0;
+	  				layui_error("此账号已冻结！"); 
+	  			}else if(data.back_code == 300){
+	  				has_send = 0;
+	  				layui_error("短信获取过于频繁！");
+	  			}
+	  			
+	  		}
+		}); 
+		
+	}
+	 
+}
+
+function login_code(){
+	
+	var phone = $("#num2").val().trim(); 
+	var code = $("#code").val().trim();
+	
+	$("#login2").attr("disabled",true);
+	
+	if(phone=="" || isPhone(phone) == false){ 
+		$("#login2").attr("disabled",false);
+		$(".num2-err").removeClass("hide");
+		return false;
+	}else{
+		$(".num2-err").addClass("hide");
+	}
+	
+	if(code == "" || IsNumber(code) == false || code.length!=6){
+		$("#login2").attr("disabled",false);
+		$(".error").removeClass("hide");  
+		return false;
+	}else{
+		$(".error").addClass("hide"); 
+		 
+	}
+	
+	$.ajax({
+		type:"post",
+  		url: getRootPath() +"/sjinfo/login_code.do",
+  		dataType:"json",
+  		data:{"phone":phone,"code":code},
+  		success: function(data){
+  			
+  			if(data.back_code == 200){
+  				 
+  				var obj = {"id":data.id,"phone":phone,"token":data.token};
+  				var str =JSON.stringify(obj); 
+  				setCookie(Merchants_Cookie,str);
+  			
+  				location.href = getRootPath()+"/pages/sjpc/merindex.html"; 
+  				
+  			}else if(data.back_code == 404){
+  				$("#login2").attr("disabled",false);
+  				layui_error("您的手机号尚未注册！");
+  			}else if(data.back_code == 100){
+  				$("#login2").attr("disabled",false);
+  				layui_error("请先获取短信验证码！");  
+  			}else if(data.back_code == 300 || data.back_code == 150){
+  				$("#login2").attr("disabled",false);
+  				layui_error("您的手机号或短信验证码错误！");
+  			}else if(data.back_code == 500){
+  				$("#login2").attr("disabled",false);
+  				layui_error("此账号已冻结！");
+  			} 
+  		}
+	}); 
+}
+
+</script>
+</html>

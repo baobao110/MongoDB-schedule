@@ -1,0 +1,907 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	padding: 0;
+	margin: 0;
+	font-weight: normal;
+	font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+}
+
+:-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #f6f7f9;
+}
+
+.clearfix {
+	clear: both;
+}
+
+#loadfirst {
+	z-index: 3;
+}
+
+#pzpage {
+	z-index: 2;
+}
+
+
+/**加载***/
+
+#loading {
+	background: #066A87;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	vertical-align: middle;
+}
+
+#loading .single {
+	display: block;
+	width: 100%;
+	position: absolute;
+	height: 50%;
+	top: 25%;
+	vertical-align: middle;
+	text-align: center;
+	background-size: 100%;
+}
+
+#loading .single img {
+	width: 40%;
+	position: absolute;
+	right: 5%;
+	top: -45%;
+}
+
+#loading .single .em1 {
+	width: 90px;
+	height: 90px;
+	border-radius: 45px;
+	margin: 0 auto;
+	background: url(../img/timg.jpg) no-repeat center center;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	background-size: 100%;
+	margin-top: 10%;
+}
+
+#loading .single .em1:after {
+	content: '';
+	position: absolute;
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	box-shadow: 0 0 1px 2px rgba(255, 255, 255, 0.8);
+	top: 50%;
+	left: 50%;
+	margin-top: -90px;
+	margin-left: -90px;
+	z-index: 3;
+	opacity: 0;
+	-webkit-animation: halo 1s 0.5s infinite ease-out;
+	-moz-animation: halo 1s 0.5s infinite ease-out;
+	animation: halo 1s 0.5s infinite ease-out;
+}
+
+#loading .single .em2:after {
+	content: '';
+	position: absolute;
+	width: 240px;
+	height: 240px;
+	border-radius: 50%;
+	box-shadow: 0 0 1px 2px rgba(255, 255, 255, 0.8);
+	top: 50%;
+	left: 50%;
+	margin-top: -120px;
+	margin-left: -120px;
+	z-index: 3;
+	opacity: 0;
+	-webkit-animation: halo 1s 0.5s infinite ease-out;
+	-moz-animation: halo 1s 0.5s infinite ease-out;
+	animation: halo 1s 0.5s infinite ease-out;
+}
+
+
+/*#loading .single .em3:after { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; box-shadow: 0 0 1px 2px rgba(255,255,255,0.8); top: 50%; left: 50%; margin-top: -150px; margin-left: -150px; z-index: 3; opacity: 0; -webkit-animation: halo 1s 0.5s infinite ease-out; -moz-animation: halo 1s 0.5s infinite ease-out; animation: halo 1s 0.5s infinite ease-out; }
+  */
+
+#loading .single .textdiv {
+	color: #F6F7F9;
+	text-align: center;
+	margin-top: 50px;
+}
+
+#loading .single .textdiv .oneb {
+	width: 100%;
+	text-align: center;
+	display: block;
+	line-height: 30px;
+}
+
+#loading .single .textdiv .username {
+	font-size: 20px;
+}
+
+#loading .single .textdiv .fromwhere {
+	font-size: 15px;
+}
+
+#loading .single .textdiv .level {
+	font-size: 20px;
+	color: #F8A718;
+}
+
+
+
+/**滤镜***/
+
+.blur {
+	filter: url(blur.svg#blur);
+	/* FireFox, Chrome, Opera */
+	-webkit-filter: blur(1px);
+	/* Chrome, Opera */
+	-moz-filter: blur(1px);
+	-ms-filter: blur(1px);
+	filter: blur(1px);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+	/* IE6~IE9 */
+}
+
+
+/******pzpage********/
+
+#loading #pzpage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+#loading #pzpage .qjdiv {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#loading #pzpage .qjdiv#qj2 {
+	background: url(../img/pz1.png) no-repeat center;
+	background-size: 100%;
+}
+
+#loading #pzpage .qjdiv#qj1 {
+	background: url(../img/pz2.png) no-repeat center;
+	background-size: 100%;
+}
+
+
+#loading #pzpage .userinfo {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+}
+
+#loading #pzpage .userinfo#myuser {
+	top: 17%;
+	left: 40%;
+}
+
+#loading #pzpage .userinfo#otheruser {
+	top: 60%;
+	left: 56%;
+}
+
+#loading #pzpage .userinfo img {
+	width: 17%;
+	border-radius: 50%;
+	text-align: center;
+}
+
+#loading #pzpage .userinfo b {
+	line-height: 25px;
+	color: #FFFFFF;
+	display: block;
+}
+
+#loading #pzpage .userinfo .name {
+	font-size: 20px;
+}
+
+#loading #pzpage .userinfo .from {
+	font-size: 15px;
+}
+
+#loading #title {
+	position: absolute;
+	top: 43%;
+	left: 5%;
+	width: 90%;
+}
+
+
+
+#loading #main {
+	position: absolute;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+#loading #main #head {
+	margin-top: 5%;
+	width: 100%;
+	height: 10%;
+	max-height: 4em;
+	position: relative;
+}
+
+#loading #main #head .user_info {
+	width: 45%;
+	max-width: 220px;
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+#loading #main #head #leftdiv {
+	background: url(../img/left.png) center no-repeat;
+	background-size: 100% 100%;
+	float: left;
+	text-align: left;
+}
+
+#loading #main #head #rightdiv {
+	background: url(../img/right.png) center no-repeat;
+	background-size: 100% 100%;
+	float: right;
+	text-align: right;
+}
+
+#loading #main #head .user_info .imgdiv {
+	width: 2.6em;
+	height: 2.6em;
+	border-radius: 50%;
+	background: #FFFFFF;
+	text-align: center;
+	display: inline-block;
+	marign: 0px auto;
+}
+
+#loading #main #head .user_info .imgdiv img {
+	width: 2.2em;
+	height: 2.2em;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 0.2em;
+}
+
+#loading #main #head #leftdiv .imgdiv {
+	margin-left: 10%;
+	margin-top: 6%;
+	float: left;
+}
+
+#loading #main #head #rightdiv .imgdiv {
+	margin-right: 10%;
+	margin-top: 6%;
+	float: right;
+}
+
+#loading #main #head #leftdiv .uname {
+	margin-left: 10px;
+}
+
+#loading #main #head #leftdiv .uscore {
+	margin-left: 10px;
+}
+
+#loading #main #head #rightdiv .uname {
+	margin-right: 10px;
+}
+
+#loading #main #head #rightdiv .uscore {
+	margin-right: 10px;
+}
+
+#loading #main #head .user_info .uname {
+	font-size: 12px;
+	color: #FFFFFF;
+	display: inline-block;
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: 5px;
+}
+
+#loading #main #head .user_info .uscore {
+	font-size: 22px;
+	color: #FFFFFF;
+	line-height: 30px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 50%;
+}
+
+
+/***加载滚动***/
+
+#loading #jdloading {
+	position: absolute;
+	width: 4em;
+	height: 4em;
+	display: inline-block;
+	left: 42.5%;
+	top: 0.1em;
+	border-radius: 2em;
+	background: #FFA640;
+	-moz-box-shadow: 0px 0px 20px rgba(29, 161, 244, 0.3);
+	-webkit-box-shadow: 0px 0px 20px rgba(29, 161, 244, 0.3);
+	box-shadow: 0px 0px 20px rgba(29, 161, 244, 0.3);
+}
+
+#loading #jdloading .progress {
+	position: absolute;
+	width: 3em;
+	height: 3em;
+	background-color: #FFFFFF;
+	/* background: transparent;*/
+	color: #000;
+	border-radius: 50%;
+	left: 0.5em;
+	top: 0.5em;
+	line-height: 3em;
+	text-align: center;
+}
+
+#loading #jdloading .progress span {
+	background: #066A87;
+	position: absolute;
+	width: 2.6em;
+	height: 2.6em;
+	color: #FFFFFF;
+	border-radius: 50%;
+	left: 0.2em;
+	top: 0.2em;
+	line-height: 2.6em;
+	text-align: center;
+	font-size: 16px;
+	word-break: break-all;
+	word-wrap: break-word;
+	display: inline-block;
+}
+
+#loading #jdloading .progress span sm {
+	font-size: 12px;
+	display: inline-block;
+}
+
+#loading #jdloading .left,
+.right {
+	width: 2em;
+	height: 4em;
+	overflow: hidden;
+	position: relative;
+	float: left;
+}
+
+#loading #jdloading .left {
+	border-radius: 4em 0 0 4em;
+}
+
+#loading #jdloading .right {
+	border-radius: 0 4em 4em 0;
+}
+
+#loading #jdloading .left div,
+.right div {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 2em;
+	height: 4em;
+	background-color: white;
+	border-radius: 4em 0 0 4em;
+	transition: all .3s;
+	transform-origin: right center;
+	transform: rotateZ(-180deg);
+}
+
+#loading #jdloading .right div {
+	content: "";
+	position: absolute;
+	display: block;
+	border-radius: 0 4em 4em 0;
+	transform-origin: left center;
+}
+
+#loading #jdloading .left div,
+#loading #jdloading .right div {
+	/*opacity:0.8;*/
+	background-color: #FFFFFF;
+	display: block;
+	border: none;
+}
+
+
+/**题目区域***/
+
+#loading #main #bodyarea {
+	margin-top: 5%;
+	width: 100%;
+	height: 80%;
+	position: relative;
+}
+
+#loading #main #bodyarea #showIndex {
+	color: #FFFFFF;
+	text-align: center;
+	width: 100%;
+	font-size: 30px;
+	font-weight: 600;
+	letter-spacing: 10px;
+	font-family: sans-serif;
+	display: none;
+}
+
+#loading #main #bodyarea #iteminfo {
+	width: 90%;
+	margin-left: 5%;
+	color: #FFFFFF;
+	margin-top: 15%;
+	text-align: center;
+}
+
+#loading #main #bodyarea #iteminfo #question {
+	font-size: 20px;
+	letter-spacing: 2px;
+	font-family: sans-serif;
+	margin-bottom: 10%;
+	text-align: center;
+	width: 90%;
+	margin-left: 5%;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist {
+	width: auto;
+	display: inline-block;
+	width: fit-content;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone {
+	position: relative;
+	padding-left: 15px;
+	padding-right: 15px;
+	line-height: 50px;
+	background: #FFFFFF;
+	color: #F8A718;
+	margin-top: 10px;
+	min-width: 100px;
+	width: auto;
+	display: block;
+	border-radius: 25px;
+	width: fit-content;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: 100%;
+	-moz-box-shadow: 2px 2px 5px #104A70;
+	-webkit-box-shadow: 2px 2px 5px #104A70;
+	box-shadow: 2px 2px 5px #104A70;
+	text-align: center;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone span{
+	background: transparent;
+	box-shadow:none;
+}
+
+/*****结果******/
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone i {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	border-radius: 7.5px;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.sucRes {
+	background: #097024;
+	color: #FFFFFF;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.successchoose {
+	-moz-box-shadow: 2px 2px 8px #097024;
+	-webkit-box-shadow: 2px 2px 8px #097024;
+	box-shadow: 2px 2px 8px #097024;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.successchoose i.myi {
+	background-image: url(../img/xz.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	left: 10%;
+	top: 33%
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.errorchoose {
+	-moz-box-shadow: 2px 2px 8px #70100C;
+	-webkit-box-shadow: 2px 2px 8px #70100C;
+	box-shadow: 2px 2px 8px #70100C;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.errorchoose i.myi {
+	background-image: url(../img/xz2.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	left: 10%;
+	top: 33%
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.otherSucchoose {
+	-moz-box-shadow: 2px 2px 8px #097024;
+	-webkit-box-shadow: 2px 2px 8px #097024;
+	box-shadow: 2px 2px 8px #097024;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.otherSucchoose i.otheri {
+	background-image: url(../img/xz.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	right: 10%;
+	top: 33%
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.othererrorchoose {
+	-moz-box-shadow: 2px 2px 8px #70100C;
+	-webkit-box-shadow: 2px 2px 8px #70100C;
+	box-shadow: 2px 2px 8px #70100C;
+}
+
+#loading #main #bodyarea #iteminfo #chooselist .chooseone.othererrorchoose i.otheri {
+	background-image: url(../img/xz2.png);
+	background-repeat: no-repeat;
+	background-size: 15px;
+	background-size: 100%;
+	right: 10%;
+	top: 33%
+}
+
+
+/**结果页**/
+
+#loading #resarea {
+	position: absolute;
+	z-index: 555;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+#loading #resarea #head {
+	margin-top: 5%;
+	width: 100%;
+	height: 10%;
+	max-height: 4em;
+	position: relative;
+}
+
+#loading #resarea #head .user_info {
+	width: 25%;
+	max-width: 220px;
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+#loading #resarea #head #resleftdiv {
+	background: url(../img/resleft.png) center no-repeat;
+	background-size: 100% 100%;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+
+#loading #resarea #head #resrightdiv {
+	background: url(../img/resright.png) center no-repeat;
+	background-size: 100% 100%;
+	float: right;
+	text-align: right;
+	position: relative;
+}
+
+#loading #resarea #head .user_info .imgdiv {
+	width: 2.6em;
+	height: 2.6em;
+	border-radius: 50%;
+	background: #FFFFFF;
+	text-align: center;
+	display: inline-block;
+	marign: 0px auto;
+}
+
+#loading #resarea #head .user_info .imgdiv img {
+	width: 2.2em;
+	height: 2.2em;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 0.2em;
+}
+
+#loading #resarea #head #resleftdiv .imgdiv {
+	margin-right: 15%;
+	margin-top: 8%;
+	float: right;
+}
+
+#loading #resarea #head #resrightdiv .imgdiv {
+	margin-left: 15%;
+	margin-top: 8%;
+	float: left;
+}
+
+#loading #resarea #head #resleftdiv .uname {
+	position: absolute;
+	right: -40px;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+
+#loading #resarea #head #resrightdiv .uname {
+	position: absolute;
+	left: -40px;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+
+
+/**结尾分数**/
+
+#loading #resarea #headinfo {
+	margin-top: 3px;
+	width: 100%;
+	height: 7em;
+	position: relative;
+	font-size: 15px;
+	color: #FFFFFF;
+}
+
+#loading #resarea #headinfo .user_info {
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+	position: relative;
+}
+
+#loading #resarea #headinfo #headinfo_leftdiv {
+	width: 55%;
+	position: relative;
+}
+#loading #resarea #headinfo #headinfo_rightdiv {
+	width: 35%;
+}
+
+
+#loading #resarea #headinfo #headinfo_leftdiv {
+	background: #66CBFD;
+	float: left;
+	text-align: left;
+	border-bottom-right-radius: 100px;
+	border-top-right-radius: 100px;
+}
+
+#loading #resarea #headinfo.fail #headinfo_leftdiv {
+	width: 35%;
+	position: relative;
+}
+
+#loading #resarea #headinfo.fail #headinfo_rightdiv {
+	width: 55%;
+}
+
+#loading #resarea #headinfo.pj #headinfo_leftdiv {
+	width: 35%;
+	position: relative;
+}
+
+#loading #resarea #headinfo.pj #headinfo_rightdiv {
+	width: 35%;
+}
+
+#loading #resarea #headinfo #headinfo_rightdiv {
+	background: #FD66CB;
+	float: right;
+	text-align: right;
+	border-bottom-left-radius: 100px;
+	border-top-left-radius: 100px;
+}
+
+#loading #resarea #headinfo #headinfo_leftdiv b.ucore {
+	background: #FFFFFF;
+	display: block;
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 20px;
+	line-height: 25px;
+	width: 100px;
+	position: absolute;
+	bottom: -5px;
+	color: #104A70;
+	font-size: 13px;
+	text-align: center;
+}
+
+#loading #resarea #headinfo #headinfo_rightdiv b.ucore {
+	background: #FFFFFF;
+	display: block;
+	border-bottom-left-radius: 20px;
+	border-top-left-radius: 20px;
+	line-height: 25px;
+	width: 100px;
+	position: absolute;
+	bottom: -5px;
+	right: 0;
+	color: #104A70;
+	font-size: 13px;
+	text-align: center;
+}
+
+#loading #resarea #headinfo .user_info .scorediv {
+	width: 50%;
+	text-align: center;
+	position: absolute;
+	bottom: 30px;
+	font-size: 15px;
+}
+
+#loading #resarea #headinfo #headinfo_leftdiv .scorediv {
+	left: 0%;
+}
+
+#loading #resarea #headinfo #headinfo_rightdiv .scorediv {
+	right: 0%;
+}
+
+#loading #resarea #headinfo #headinfo_leftdiv .scorediv b {
+	font-size: 30px;
+}
+
+#loading #resarea #headinfo #headinfo_rightdiv .scorediv b {
+	font-size: 22px;
+}
+
+#loading #resarea #headinfo.fail #headinfo_leftdiv .scorediv b {
+	font-size: 22px;
+}
+
+#loading #resarea #headinfo.fail #headinfo_rightdiv .scorediv b {
+	font-size: 30px;
+}
+
+
+/**结果***/
+
+#loading #resarea #catchdiv {
+	width: 100%;
+	position: relative;
+	
+	display: inline-block;
+	height: 3em;
+	padding-top: 1em;
+}
+#loading #resarea .oneresdiv {
+	width: 90%;
+	margin-left: 5%;
+	background: url(../img/line.png) no-repeat center;
+	background-size:100% 70%;
+	background-position:0 150% ;
+	position: relative;
+	margin-top: 2em;
+	display: block;
+	height:3em;
+	text-align: center;
+}
+#loading #resarea .oneresdiv i{
+	display: inline-block;
+	width: 2.5em;
+	height: 2.5em;
+	vertical-align: middle;
+}
+#loading #resarea .oneresdiv i.jf{
+	background: url(../img/jf.png) no-repeat center;
+	background-size:100% ;
+	
+}
+#loading #resarea .oneresdiv i.exp{
+	background: url(../img/exp.png) no-repeat center;
+	background-size:100% ;
+	
+}
+#loading #resarea .oneresdiv b.numshow{
+	color: #FFFFFF;
+	font-family: "微软雅黑";
+	font-size: 22px;
+	display: inline-block;
+vertical-align: middle;
+}
+
+#resbtn{
+	width: 100%;
+	height: auto;
+	padding-top: 2em;
+	position: relative;
+	display: inline-block;
+	margin-top:2em;
+	text-align: center;
+}
+#resbtn .btn{
+	width: 10em;
+	display: block;
+	border-radius: 10px;
+	height: 3em;
+	margin: auto;
+}
+#resbtn #tzbtn{
+	background: url(../img/btntz.png) no-repeat center;
+	background-size:100% ;
+	
+}
+#resbtn #cancelbtn{
+	background: url(../img/cancel.png) no-repeat center;
+	background-size:100% ;
+	
+}
+
+/**结局**/
+#loading #resarea #headinfo .resimg{
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top:1em;
+	background: url(../img/tzsuc.png) no-repeat center;
+	background-size:100% ;
+	left: 25%;
+	
+}
+#loading #resarea #headinfo.fail .resimg{
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top:1em;
+	background: url(../img/tzfail.png) no-repeat center;
+	background-size:100% ;
+	left: 25%;
+	
+}
+#loading #resarea #headinfo.pj .resimg{
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	top:1em;
+	background: url(../img/tzpj.png) no-repeat center;
+	background-size:100% 100%;
+	left: 25%;
+	
+}

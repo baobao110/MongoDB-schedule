@@ -1,0 +1,25 @@
+
+
+function get(name){
+	return localStorage.getItem(name);
+}
+
+
+$(function () {
+	var UUID=get("UUID");
+		
+	$.ajax({
+       type : "POST",
+       dataType : "json",
+       url : "/ay/admin/flag.do",
+       data : {uuid:UUID},
+       success : function(ajaxDAO) {
+    	   
+           if (ajaxDAO.success==false) {
+        	   window.open("http://localhost:8080/ay/pages/pt/common/login.html");
+           }
+         
+       }
+   });
+});
+

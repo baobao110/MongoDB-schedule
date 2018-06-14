@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Olympic</string>
+    <string name="action_settings">settings</string> 
+    <!-- 主页提示内容 -->
+    <string name="main_prompt">您好，我是小奥，请说出或填写您的学号。</string>
+    
+    <string name="main_login">登录我的账户</string>
+    <string name="main_register">注册新账户</string>
+    <string name="main_exit">退出</string>
+    
+    <string name="main_name">您的姓名是：</string>
+    <string name="main_studentid">您的学号是：</string>
+    
+    <string name="main_ask">学习</string>
+    <string name="main_guessing">竞答</string>
+    <string name="main_pk">PK</string>
+     
+    
+    <string name="pass_title">安全密码</string>
+    <string name="pass_clean">清除</string>
+    <string name="pass_delete">删除</string>
+    
+    <string name="set_title">设置</string>
+    <string name="set_robit">请选择机器人编号</string>
+    <string name="set_school">请选择所在学校</string>
+    <string name="set_pass1">请输入安全密码</string>
+    <string name="set_pass2">重新输入安全密码</string>
+    <string name="set_save">保存</string>
+    
+    <string name="reg_title">注册</string> 
+    <string name="reg_class">请输入您的班级</string>
+    <string name="reg_name">请输入您的姓名</string>
+    <string name="reg_stduentid">请输入您的学号</string>
+    <string name="reg_parent">请输入您的家长</string>
+    <string name="reg_phone">请输入您的手机号</string>
+    <string name="reg_button">注册</string>
+    
+    <string  name="choose_prompt">您可以选择奥运知识学习，奥运竞答练习，也可以选择奥运知识pk。</string>
+     
+    
+    
+
+</resources>

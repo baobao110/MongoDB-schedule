@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>奥运机器人平台管理</title>
+
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+<script type="text/javascript">
+
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	}, {
+		type : "link",
+		path : "/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/global.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/animate.css"
+	}, {
+		type : "link",
+		path : "/assets/admin/css/login.css"
+	} 
+	];
+	
+	function save(name,value){
+		localStorage.setItem(name,value);
+	}
+
+	addFilesSRC(paths);
+
+	 
+	  
+	
+	 
+	
+</script>
+
+<div class="container and">
+	<div class="content">
+		<div id="large-header" class="large-header">
+			<canvas id="demo-canvas"></canvas>
+			<div id="login">
+				<h1>
+					<strong>奥运机器人平台管理</strong>
+				</h1>
+
+				<div class="user info">
+					<label>账号</label> <input type="text" name="data[User][username]"
+					 id="username" class="en-font" placeholder="请输入账号"
+						autocomplete="off" >
+				</div>
+				<div class="pwd info">
+					<label>密码</label> <input type="password" name="data[User][password]"
+						 id="password" class="en-font" placeholder="请输入密码"
+						autocomplete="off">
+				</div>
+
+				<div class="sub">
+					<input type="submit" id="loginsubmit" value="立即登录" />
+				</div>
+				 
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var paths2 = [  {
+	type : "src",
+	path : "/assets/layui/layui.all.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/global.js"
+}, {
+	type : "src",
+	path : "/assets/admin/js/jquery.nicescroll.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/TweenLite.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/EasePack.min.js"
+}, {
+	type : "src",
+	path : "/assets/js/demo-1.js"
+} ];
+
+addFilesSRC(paths2);
+
+$('#loginsubmit').click(function (){
+	 
+	  
+	  var param={
+				name:$('#username').val(),
+				password:$('#password').val()
+			};
+	  
+	  $.ajax({
+	        type : "POST",
+	        dataType : "json",
+	        url : getRootPath()+"/login/check.do",
+	        data : param,
+	        success : function(data) {
+	     	   
+	            if (data.back_code == 200) {
+	            	
+	            	save("UUID",data.msg);
+ 
+	            	window.location.href = getRootPath()+"/pages/pt/common/pcindex.html"; 
+	            }else{ 
+	            	layui_error(data.msg);
+ 
+	            }
+	          
+	        }
+	    });
+});
+
+
+function layui_error(err){ 
+    layer.msg(err, {
+       time: 8000, //20s后自动关闭
+       btn: ["知道了"]
+     });
+}
+	
+</script>
+
+
+  
+  
+
+
+

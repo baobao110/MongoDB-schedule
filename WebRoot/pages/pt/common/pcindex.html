@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>后台管理</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta name="description" content="商信" />
+	
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+
+<script type="text/javascript">
+	var paths = [ 
+	{
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},         
+	 {
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/font-awesome.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/animate.css/animate.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/fullcalendar/dist/fullcalendar.min.css"
+	}, {
+		type : "link",
+		path : "/assets/ui/libs/bower/perfect-scrollbar/css/perfect-scrollbar.css"
+	} , {
+		type : "link",
+		path : "/assets/ui/assets/css/bootstrap.css"
+	},{
+		type : "link",
+		path : "/assets/ui/assets/css/core.css"
+	},{
+		type : "link",
+		path : "/assets/ui/assets/css/app.min.css"
+	},{
+		type : "link",
+		path : "/assets/ui/libs/bower/font-awesome/css/gg1.css"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/breakpoints.js/dist/breakpoints.min.js"
+	}
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths);
+
+	
+
+		
+	
+	
+</script>
+       
+       <style type="text/css">
+       #app-main{
+       position: absolute;
+       right:0;
+       top:60px;
+       
+       
+       }
+       
+       </style>
+
+    </head>
+
+
+    <body class="menubar-left menubar-unfold menubar-light theme-primary">
+<!--============= start main area -->
+
+<!-- APP NAVBAR ==========-->
+<nav id="app-navbar" class="navbar navbar-inverse navbar-fixed-top primary">
+  
+  <!-- navbar header -->
+  <div class="navbar-header">
+    <button type="button" id="menubar-toggle-btn" class="navbar-toggle visible-xs-inline-block navbar-toggle-left hamburger hamburger--collapse js-hamburger">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+    </button>
+
+    <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="zmdi zmdi-hc-lg zmdi-more"></span>
+    </button>
+
+    <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="zmdi zmdi-hc-lg zmdi-search"></span>
+    </button>
+
+    <a  class="navbar-brand">
+      <span class="brand-icon"><i class="fa fa-gg"></i></span>
+      <span class="brand-name">管理后台</span>
+    </a>
+  </div><!-- .navbar-header -->
+  
+  <div class="navbar-container container-fluid">
+    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+      <ul class="nav navbar-toolbar navbar-toolbar-left navbar-left">
+        <li class="hidden-float hidden-menubar-top">
+          <a href="javascript:void(0)" role="button" id="menubar-fold-btn" class="hamburger hamburger--arrowalt is-active js-hamburger">
+            <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+          </a>
+        </li>
+        <li>
+          <h5 class="page-title hidden-menubar-top hidden-float">控制台</h5>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-toolbar navbar-toolbar-right navbar-right">
+       <!--  <li class="nav-item dropdown hidden-float">
+          <a href="javascript:void(0)" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+            <i class="zmdi zmdi-hc-lg zmdi-search"></i>
+          </a>
+        </li>
+
+        
+
+        
+
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="side-panel-toggle" data-toggle="class" data-target="#side-panel" data-class="open" role="button"><i class="zmdi zmdi-hc-lg zmdi-apps"></i></a>
+        </li> -->
+        
+         <li class="dropdown">
+          <a href="/ay/pages/pt/common/login.html" class="side-panel-toggle" > <span class="m-r-xs" style="font-size: 24px;"><i class="fa fa-power-off"></i></span></a>
+        </li>
+      </ul>
+    </div>
+  </div><!-- navbar-container -->
+</nav>
+<!--========== END app navbar -->
+
+<!-- APP ASIDE ==========-->
+<aside id="menubar" class="menubar light">
+  <div class="app-user">
+    <div class="media">
+      <div class="media-left">
+        <div class="avatar avatar-md avatar-circle">
+          <a ><img class="img-responsive" src="/ay/assets/ui/assets/images/logo.png" alt="平台"/></a>
+        </div><!-- .avatar -->
+      </div>
+      <div class="media-body">
+        <div class="foldable">
+          <h5><a href="javascript:void(0)" class="username" id="user"></a></h5>
+          <ul>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <small>欢迎登陆</small>
+                <!-- <span class="caret"></span> -->
+              </a>
+              <!-- 
+              <ul class="dropdown-menu animated flipInY">
+                
+                <li>
+                  <a class="text-color" href="profile.html">
+                    <span class="m-r-xs"><i class="fa fa-user"></i></span>
+                    <span>基本资料</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="text-color" href="settings.html">
+                    <span class="m-r-xs"><i class="fa fa-gear"></i></span>
+                    <span>设置</span>
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                
+                 <li>
+                  <a class="text-color" href="/ay/pages/pt/common/login.html">
+                    <span class="m-r-xs"><i class="fa fa-power-off"></i></span>
+                    <span>退出</span>
+                  </a>
+                </li> 
+               
+              </ul>
+              -->
+            </li>
+          </ul>
+        </div>
+      </div><!-- .media-body -->
+    </div><!-- .media -->
+  </div><!-- .app-user -->
+
+  <div class="menubar-scroll">
+    <div class="menubar-scroll-inner">
+      <ul class="app-menu">
+        <li onclick="onactive(this)">
+          <a href="javascript:void(0)"  data-href="/ay/pages/pt/common/dash.html" target="app-main"  class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
+            <span class="menu-text">首页</span>
+          </a>
+          
+        </li>
+        
+        <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)"  class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-comment-text zmdi-hc-lg"></i>
+            <span class="menu-text">课程中心</span>
+<!--             <span class="label label-warning menu-label">2</span> -->
+<!--      <span class="label label-success menu-label">7</span> -->
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+           <li onclick="onactive(this)"><a  data-href="/ay/pages/pt/kc/kcList.html" target="app-main" ><span class="menu-text">课程管理</span></a></li>
+            <li onclick="onactive(this)"><a  data-href="/ay/pages/pt/kc/sendKC.html" target="app-main" ><span class="menu-text">发布课程</span></a></li>
+            <li onclick="onactive(this)"><a  data-href="/ay/pages/pt/kc/tmList.html" target="app-main" ><span class="menu-text">课程题库</span></a></li>
+            <li onclick="onactive(this)"><a  data-href="/ay/pages/pt/kc/addTm.jsp" target="app-main" ><span class="menu-text">添加题目</span></a></li>
+           
+          </ul>
+        </li>
+
+        <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-assignment-check zmdi-hc-lg"></i>
+            <span class="menu-text">竞答管理</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li onclick="onactive(this)"><a data-href="/ay/pages/pt/jd/jdList.html" target="app-main" ><span class="menu-text">竞答设置
+        
+            </span></a></li>
+            <!--  <li onclick="onactive(this)"><a  data-href="/ay/pages/pt/jd/sendJD.html" target="app-main" ><span class="menu-text">添加有奖竞答</span></a></li>
+            -->
+            
+             <li onclick="onactive(this)"><a data-href="/ay/pages/pt/jd/pass.html" target="app-main" ><span class="menu-text">竞答关口
+            </span></a></li>
+            
+             <li onclick="onactive(this)"><a data-href="/ay/pages/test/history.html" target="app-main" ><span class="menu-text">竞答记录
+            </span></a></li>
+          </ul>
+          
+            
+        </li>
+        
+        <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-case zmdi-hc-lg"></i>
+            <span class="menu-text">学校管理</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li onclick="onactive(this)"><a data-href="/ay/pages/pt/sc/scList.html" target="app-main" ><span class="menu-text">全部学校
+            </span></a></li>
+              <li onclick="onactive(this)"><a data-href="/ay/pages/pt/sc/student_list.html" target="app-main" ><span class="menu-text">全部学生
+            </span></a></li>
+            
+             
+          </ul>
+        </li>
+        
+        
+         <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-case zmdi-hc-lg"></i>
+            <span class="menu-text">管理员</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li onclick="onactive(this)"><a data-href="/ay/admin//toPage.do" target="app-main" ><span class="menu-text">管理员维护
+            </span></a></li>
+           
+          </ul>
+        </li>
+        
+      <!--    <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-case zmdi-hc-lg"></i>
+            <span class="menu-text">考试记录</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li onclick="onactive(this)"><a data-href="/ay/pages/test/history.html" target="app-main" ><span class="menu-text">记录查询
+            </span></a></li>
+           
+          </ul>
+        </li> -->
+        
+         <li class="has-submenu" onclick="onactive(this)">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-case zmdi-hc-lg"></i>
+            <span class="menu-text">广告中心</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li onclick="onactive(this)"><a data-href="/ay/pages/advertise/add.html" target="app-main" ><span class="menu-text">添加广告
+            </span></a></li>
+            <li onclick="onactive(this)"><a data-href="/ay/pages/advertise/manage.html" target="app-main" ><span class="menu-text">广告管理
+            </span></a></li>
+          </ul>
+        </li>
+        
+
+        
+        
+        
+
+       <!--  <li class="menu-separator"><hr></li>
+
+        <li>
+          <a href="javascript:void(0)">
+            <i class="menu-icon zmdi zmdi-file-text zmdi-hc-lg"></i>
+            <span class="menu-text">日志</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)">
+            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
+            <span class="menu-text">设置</span>
+          </a>
+        </li> -->
+        
+        
+      </ul><!-- .app-menu -->
+    </div><!-- .menubar-scroll-inner -->
+  </div><!-- .menubar-scroll -->
+</aside>
+<!--========== END app aside -->
+
+<!-- navbar search -->
+<div id="navbar-search" class="navbar-search collapse">
+  <div class="navbar-search-inner">
+    <form action="#">
+      <span class="search-icon"><i class="fa fa-search"></i></span>
+      <input class="search-field" type="search" placeholder="search..."/>
+    </form>
+    <button type="button" class="search-close" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+      <i class="fa fa-close"></i>
+    </button>
+  </div>
+  <div class="navbar-search-backdrop" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false"></div>
+</div><!-- .navbar-search -->
+
+<!-- APP MAIN ==========-->
+
+
+<iframe id="app-main" class="app-main" frameborder=0 scrolling="auto" src="dash.html" ></iframe>
+
+<!--========== END app main -->
+
+	
+	
+	<!-- SIDE PANEL -->
+	<div id="side-panel" class="side-panel">
+		<div class="panel-header">
+			<h4 class="panel-title">信息</h4>
+		</div>
+		<div class="scrollable-container">
+			
+		</div><!-- .scrollable-container -->
+	</div><!-- /#side-panel -->
+
+	
+	
+
+	
+	<script type="text/javascript" src="/ay/assets/url.js"></script>	
+
+	<script type="text/javascript">
+	 var paths2 = [ //<!-- build:js ../assets/js/core.min.js -->
+	          {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery-ui/jquery-ui.min.js"
+	} ,{
+		type : "src",
+		path : "/assets/ui/libs/bower/jQuery-Storage-API/jquery.storageapi.min.js"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery-slimscroll/jquery.slimscroll.js"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/PACE/pace.min.js"
+	}
+	//	<!-- build:js ../assets/js/app.min.js -->
+	,{
+		type : "src",
+		path : "/assets/ui/assets/js/library.js"
+	},{
+		type : "src",
+		path : "/assets/ui/assets/js/plugins.js"
+	}/* ,{
+		type : "src",
+		path : "/assets/ui/assets/js/core.min.js"
+	} */,{
+		type : "src",
+		path : "/assets/ui/assets/js/app.js"
+	}
+	//<!-- endbuild -->
+	,{
+		type : "src",
+		path : "/assets/ui/libs/bower/moment/moment.js"
+	},{
+		type : "src",
+		path : "/assets/ui/libs/bower/fullcalendar/dist/fullcalendar.min.js"
+	},{
+		type : "src",
+		path : "/assets/ui/assets/js/fullcalendar.js"
+	}
+	
+	];
+
+	addFilesSRC(paths2);
+
+	Breakpoints();
+	
+	function showArea(){
+		var w=$("body").width()-$("#menubar").width();
+		var h=$("body").height()-60;
+		
+		$("#app-main").css("width",w+"px");
+		$("#app-main").css("height",h+"px");
+		
+		
+	}
+	
+	showArea();
+	
+	$(window).resize(function(){
+		showArea();
+		});
+	$(function(){
+		$("a[target='app-main']").on("click",function(){
+			
+			if($(this).attr("data-href")!= null || $(this).attr("data-href")!= undefined){
+				document.getElementById("app-main").src=$(this).attr("data-href");
+			} 
+			
+		});
+		
+		
+	});
+	function onactive(obj){
+		$(obj).siblings('li').removeClass("active");
+		
+		$(obj).toggleClass("active");
+	}
+	
+	
+</script>
+<script type="text/javascript" src="/ay/assets/login.js"></script>
+</body>
+</html>

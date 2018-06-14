@@ -1,0 +1,246 @@
+package com.hysm.controller.game;
+
+
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.hysm.controller.base.BaseController;
+import com.hysm.game.GameUtil;
+import com.hysm.game.GameVO;
+import com.hysm.service.IMessageService;
+
+@Controller
+@RequestMapping("/jdgame")
+public class JdGameController extends BaseController {
+	@Autowired
+	private IMessageService meService;
+	
+	
+	
+	@RequestMapping("ajaxLogin")
+	public void ajaxLogin(HttpServletRequest req, HttpServletResponse resp){
+		
+		
+		
+		String uid=req.getParameter("uid");
+		
+		GameUtil.OnlineUsers.put(uid, System.currentTimeMillis());
+		
+		sendJSONP("200", resp, "ajaxLoginShow", 3);
+	}
+	
+	
+	@RequestMapping("getData")
+	public void getData(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String uid=req.getParameter("uid");
+		int passnum=Integer.valueOf(req.getParameter("passnum"));
+		
+		if(req.getParameter("type").equals("login")){
+			
+			
+			GameUtil.addCuser(uid,passnum);
+			
+		}
+		System.out.println("cusers:::::::::;;;"+GameUtil.cusers.toString());
+		System.out.println("games:::::::::;;;"+GameUtil.games.size());
+		// 请求竞技用户
+		GameVO game = this.queryGame(req);
+		
+		
+//		System.out.println("Cuser::::::"+GameUtil.cusers.toString());
+//		System.out.println("games::::::"+GameUtil.games.toString());
+		// 返回组合数据
+		//System.out.println("first:"+game.getStatus()+","+game.getUser(req.getParameter("uid")));
+		
+		if(game!=null){
+			sendJSONP(game.getData().toJSONString(), resp, "initReq", 1);
+			
+			
+			
+			if(game.getStatus()==GameUtil.status[2]){
+				
+				meService.addJDres(game);
+				
+			}
+		}else{
+			sendJSONP("404", resp, "initReq", 3);
+		}
+		
+		
+	}
+
+	private GameVO queryGame(HttpServletRequest req) {
+		
+		
+		String uid = req.getParameter("uid");
+		
+//		System.out.println("sessionid=="+uid);
+		
+		
+		
+		GameVO game = null;
+
+		
+		// 是否在竞答
+		if (!GameUtil.cusers.containsKey(uid)) {
+			
+			
+			// 是 获取比赛组合
+            game=GameUtil.queryGameByuid(uid);
+
+		}
+
+		
+		
+		
+		if (game != null) {
+			
+				
+				
+				if(!game.hadItems()){
+					//查找题目
+					JSONArray items=meService.ajaxTestQuestions(game.getNum());
+					
+					game.setItems(items);
+					
+				}
+				
+			
+		}
+
+		if (game == null) {
+
+			game=GameUtil.queryGameByuid(uid);
+		}
+
+		return game;
+
+	}
+		
+	
+	/**
+	 * 答题上传
+	 * @param req
+	 * @param resp
+	 */
+	@RequestMapping("sendThisItem")
+	public void sendThisItem(HttpServletRequest req, HttpServletResponse resp){
+		
+		GameVO game = this.queryGame(req);
+		
+		
+		String uid=req.getParameter("uid");
+		String choose=req.getParameter("choose");
+		int index=Integer.valueOf(req.getParameter("index"));
+		long etime=System.currentTimeMillis();
+		game.sendUserRes(uid,index,choose,etime);
+		
+		//System.out.println("two:"+game.getStatus()+","+game.getUser(req.getParameter("uid")));
+		
+		
+		sendJSONP(game.getData().toJSONString(), resp, "sendThisItemShow", 1);
+		
+		
+		
+		
+		if(game.getStatus()==GameUtil.status[2]){
+			
+			
+			meService.addJDres(game);
+			
+		}
+		
+		
+	}
+	
+	
+	/**
+	 * 竞答开始
+	 * @param req
+	 * @param resp
+	 */
+	@RequestMapping("startJD")
+	public void startJD(HttpServletRequest req, HttpServletResponse resp){
+		
+		
+		System.out.println("==答题 开始===");
+		
+		GameVO game = this.queryGame(req);
+		
+		String uid=req.getParameter("uid");
+		int index=Integer.valueOf(req.getParameter("index"));
+		
+		
+		
+		game.itemStart(uid,index);
+		
+		String uname=game.getUser(uid);
+		
+		System.out.println("start __index:"+index+","+uname);
+
+     	boolean can=true;
+     	JSONArray items=game.getData().getJSONArray(GameUtil.KEY_ITEMS);
+     	JSONObject userres=items.getJSONObject(index-1).getJSONObject(GameUtil.userRes);
+     	
+		while(userres.keySet().size()!=2&&can){
+			
+			userres=items.getJSONObject(index-1).getJSONObject(GameUtil.userRes);
+			
+			
+			if(!GameUtil.isNoExter(game.noMy(uid))){
+				//对面已离开
+				can=false;
+				game.finished();
+				
+				break;
+			}
+			
+		}
+		
+
+		System.out.println("stop __index:"+index+","+uname);
+
+		
+		
+		
+//		System.out.println(game.getData().getJSONArray(GameUtil.KEY_ITEMS).getJSONObject(index-1).toJSONString());
+		if(game.getStatus()!=GameUtil.status[2]){
+			
+			//设置开始时间
+			long stime=System.currentTimeMillis();
+			Iterator<String> its=	userres.keySet().iterator();
+			while(its.hasNext()){
+				String key=its.next();
+				JSONObject oneres=userres.getJSONObject(key);
+				oneres.put("stime", stime);
+			}
+			game.updateItems(items);
+			
+			
+			
+			sendJSONP("200", resp, "startJDshow", 3);
+		  
+		}else{
+			//有人离开，竞答结束
+			sendJSONP(game.getData().toJSONString(), resp, "startJDshow", 1);
+			
+			meService.addJDres(game);
+		}
+	
+		
+		
+		
+		
+	}
+
+
+}

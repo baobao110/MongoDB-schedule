@@ -1,0 +1,43 @@
+package com.hysm.controller.advertise;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hysm.dao.ajaxDAO;
+import com.hysm.service.IMessageService;
+import com.hysm.service.adService;
+import com.hysm.util.StringUtil;
+
+@Controller
+@RequestMapping("/advertise")
+public class adController {
+	
+	@Autowired
+	private adService ad;
+	
+	@RequestMapping("save")
+	@ResponseBody
+	public String save(String data){
+			if(StringUtil.bIsNotNull(data)){
+				Document doc=Document.parse(data);
+				try{
+					int res=ad.save(doc);
+					System.out.println("res++++++++"+res);
+					if(res>0){
+						System.out.println("______________________________-");
+						return "200";
+						}
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				return "400";
+			}
+			return "400";
+			
+		}
+}
+		
+

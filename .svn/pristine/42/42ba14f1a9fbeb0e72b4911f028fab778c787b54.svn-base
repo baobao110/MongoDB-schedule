@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg1"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="1"
+        android:orientation="vertical" >
+         
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7" 
+        android:orientation="horizontal">
+        
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:focusable="true"   
+			android:focusableInTouchMode="true"
+            android:orientation="vertical">
+            
+            <LinearLayout 
+             android:id="@+id/main_login_view"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"  
+             android:orientation="vertical"> 
+              <TextView
+                android:id="@+id/main_prompt_text" 
+	            android:layout_height="wrap_content"
+	            android:layout_width="fill_parent"
+	            android:layout_marginLeft="60dp"
+	            android:layout_marginRight="20dp"
+	            android:textColor="@color/white"
+	            android:textSize="30dp"
+	            android:text="@string/main_prompt"/>
+              
+              
+              <EditText 
+                  android:id="@+id/main_student_edit"
+                  android:layout_width="match_parent"
+                  android:layout_height="40dp"
+                  android:layout_marginLeft="60dp"
+	              android:layout_marginRight="100dp"
+	              android:layout_marginTop="40dp"
+	              android:paddingLeft="10dp"
+	              android:paddingRight="10dp"
+	              android:maxLength="24" 
+	              android:background="@drawable/button2_style"
+	              android:hint="请输入学号"
+	              android:textSize="18dp"
+	              android:inputType="number"
+	              android:digits="0123456789"
+	              android:textColor="@color/white" 
+	              android:textColorHint="@color/ivory" />
+              
+              <LinearLayout 
+		         android:layout_width="fill_parent"
+		         android:layout_height="60dp" 
+		         android:gravity="center"
+		         android:layout_marginTop="30dp"
+		         android:orientation="vertical">
+		         
+		          <Button
+		              android:id="@+id/main_login_button"
+		              android:layout_width="240dp"
+		              android:layout_height="42dp"
+		              android:textSize="20dp"
+		              android:textColor="@color/white"
+		              android:text="登录"
+		              android:background="@drawable/button2_style"/>
+		           
+		         
+		     </LinearLayout>
+               
+               
+         </LinearLayout>
+          
+        </LinearLayout>
+         <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            
+        </LinearLayout>
+         
+    </LinearLayout>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+        
+       <LinearLayout 
+         android:layout_width="fill_parent"
+         android:layout_height="40dp" 
+         android:gravity="right|center_vertical" 
+         android:layout_marginBottom="10dp" 
+         android:orientation="horizontal" >
+             
+         <TextView
+             android:id="@+id/main_set_text" 
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/white"
+             android:textSize="24dp"
+             android:layout_marginRight="30dp"
+             android:text="设置"/>
+          
+        </LinearLayout>
+ 
+    </LinearLayout> 
+</LinearLayout>
+    
+

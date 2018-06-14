@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/black22"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/pass_back_view"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView 
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/left" />
+
+        </LinearLayout> 
+         <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+            
+             <TextView 
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" 
+                 android:textColor="@color/white"
+                 android:textSize="18dp"
+                 android:text="@string/pass_title"/>
+             
+        </LinearLayout> 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+         
+        <TextView 
+            android:id="@+id/pass_input1_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        <TextView 
+            android:id="@+id/pass_input2_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        <TextView 
+            android:id="@+id/pass_input3_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        <TextView 
+            android:id="@+id/pass_input4_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        <TextView 
+            android:id="@+id/pass_input5_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        <TextView 
+            android:id="@+id/pass_input6_text"
+            android:layout_width="36dp"
+            android:layout_height="36dp" 
+            android:textSize="24dp"
+            android:gravity="center"
+            android:background="@drawable/pass_style"/>
+        
+    </LinearLayout>
+	 <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+        <TextView 
+            android:id="@+id/pass_error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textColor="@color/red"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+        
+        <!-- 底部数字软键盘 -->
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+            <LinearLayout 
+                android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	            android:orientation="horizontal">
+	            <LinearLayout 
+	                android:id="@+id/pass_view1"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="1"/>
+	            </LinearLayout>
+	             <LinearLayout
+	                android:id="@+id/pass_view2" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout2_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="2"/>
+	                
+	            </LinearLayout>
+	             <LinearLayout
+	                android:id="@+id/pass_view3" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="3"/>
+	            </LinearLayout>
+                
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	            android:orientation="horizontal">
+	             <LinearLayout 
+	                android:id="@+id/pass_view4"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="4"/>
+	            </LinearLayout>
+	             <LinearLayout 
+	                 android:id="@+id/pass_view5"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout2_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="5"/>
+	                
+	            </LinearLayout>
+	             <LinearLayout 
+	                android:id="@+id/pass_view6"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="6"/>
+	            </LinearLayout>
+                
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	            android:orientation="horizontal">
+	             <LinearLayout
+	                android:id="@+id/pass_view7" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="7"/>
+	            </LinearLayout>
+	             <LinearLayout 
+	                android:id="@+id/pass_view8"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout2_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="8"/>
+	                
+	            </LinearLayout>
+	             <LinearLayout
+	                android:id="@+id/pass_view9" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout1_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="9"/>
+	            </LinearLayout>
+                
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	            android:orientation="horizontal">
+	             
+                <LinearLayout 
+                    android:id="@+id/pass_view_clean" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@color/ivory"
+	                android:orientation="horizontal">
+	                 <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="@string/pass_clean"/>
+	                 
+	            </LinearLayout>
+	             <LinearLayout
+	                android:id="@+id/pass_view0" 
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@drawable/linelayout2_style"
+	                android:orientation="horizontal">
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="0"/>
+	                
+	            </LinearLayout>
+	             <LinearLayout 
+	                android:id="@+id/pass_view_delete"
+	                android:layout_width="0dp"
+	                android:layout_height="fill_parent"
+	                android:layout_weight="1"
+	                android:gravity="center"
+	                android:background="@color/ivory"
+	                android:orientation="horizontal">
+	                  <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="24dp"
+	                    android:text="@string/pass_delete"/>
+	            </LinearLayout>
+                
+            </LinearLayout>
+            
+        </LinearLayout> 
+    </LinearLayout> 
+</LinearLayout>

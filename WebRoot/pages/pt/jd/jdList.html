@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>有奖竞答管理</title>
+	
+  <meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript" src="/ay/assets/url.js"></script>
+
+<script type="text/javascript">
+
+
+
+	var paths = [ {
+		type : "src",
+		path : "/assets/ui/libs/bower/jquery/dist/jquery.js"
+	},{
+		type : "link",
+		path : "/assets/layui/css/layui.css"
+	},{
+		type : "link",
+		path : "/assets/css/pc_mess/messlist.css"
+	} ];
+
+	addFilesSRC(paths);
+	 var merid="1000";
+	
+</script>
+
+  </head>
+  
+  <body class="childrenBody" style="padding: 1%;">
+		<!--<blockquote class="layui-elem-quote news_search" >
+	 <div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input" id="likename">
+		    </div>
+		    
+		    <a class="layui-btn layui-btn-mini search_btn" >查询</a>
+		</div> 
+		
+		
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-mini layui-btn-normal"  onclick="addTm()">添加竞答活动</a>
+		</div>
+	-->
+		
+		
+	</blockquote>
+	
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+  <ul class="layui-tab-title" >
+ 	<li class="layui-this" data="99">竞答</li> 
+   <!--  <li data="1">有效</li>
+    <li data="-99">已失效</li> --> 
+  
+  </ul>
+  <div class="layui-tab-content"  >
+    <div class="layui-tab-item layui-show">
+    		<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea99" lay-filter="tablearea99"></table>
+			</div>
+    
+    </div>
+    
+    <div class="layui-tab-item" >
+    		<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea1" lay-filter="tablearea1"></table>
+			</div>
+    
+    
+    </div>
+   
+    <div class="layui-tab-item" >
+    			<div class="layui-form news_list" >
+	  		<table class="layui-table" id="tablearea-99" lay-filter="tablearea-99"></table>
+			</div>
+    
+    
+    </div>
+  </div>
+</div> 
+	
+	
+	
+
+
+	<script type="text/javascript">
+	var paths = [ {
+		type : "src",
+		path : "/assets/layui/layui.js"
+	},{
+		type : "src",
+		path : "/assets/js/pc_mess/jdlist.js"
+	} 
+	,{
+		type : "src",
+		path : "/assets/login.js"
+
+	} ];
+
+	addFilesSRC(paths);
+	
+	//创建竞答
+	function addTm(){
+		var pmobj=$(top.window.document);
+		   pmobj.find("span.menu-text").each(function(){
+			var text=$(this).text().trim();
+			if(text=="添加题目"){
+				$(this).closest("a").trigger("click");
+				top.window.document.getElementById("app-main").src=$(this).closest("a").attr("data-href");
+				return;
+			}
+			
+		});
+	}
+	
+	
+	
+	
+</script>
+
+
+
+	
+
+<!-- 有效期 -->
+<script type="text/html" id="ctimestr">
+  
+
+ <span style="color: #F581B1;">{{ d.ctimestr.substring(0,10)}}</span>
+  
+
+	
+
+</script>
+
+
+<script type="text/html" id="tmdetail">
+  
+
+ <span style="color: #F581B1;font-size:18px">{{ d.title}}</span><br>
+  <span style="color: #F581B1;">{{ d.content}}</span><br>
+  <span style="color: #F581B1;">考题总数:{{ d.num}}</span><br>
+ <span style="color: #F581B1;">每题限时:{{ d.limittime}}秒</span><br>
+<span style="color: #F581B1;">每题最大分值:{{ d.onescore}}</span>&nbsp;&nbsp;
+<span style="color: #F581B1;">每题得分规则:{{ d.scoreRole}}</span><br>
+<span style="color: #F581B1;">每题答对经验:{{ d.exp}}</span><br>
+<span style="color: #F581B1;">获胜获得星:{{ d.star}}颗</span>&nbsp;&nbsp;
+<span style="color: #F581B1;">获胜答对每题获得积分:{{ d.eveScore}}</span><br>
+</script>
+
+<!-- {{#  if(d.state == 1){ }}
+    <div class="layui-btn layui-btn-danger layui-btn-sm">冻结</div>
+  {{#  } else { }}
+      <div class="layui-btn layui-btn-warm layui-btn-sm">使用</div>
+  {{#  } }} -->
+<script type="text/html" id="dowork">
+  
+  {{#  if(d.state == 1){ }}
+
+    <div class="layui-btn layui-btn-danger layui-btn-sm"  onclick="updateTMState('{{d._id}}',-99)">停止</div>
+
+  {{#  } else { }}
+
+      <div class="layui-btn layui-btn-warm layui-btn-sm"  onclick="updateTMState('{{d._id}}',1)">恢复</div>
+
+  {{#  } }}
+
+
+ <div class="layui-btn layui-btn-normal layui-btn-sm" onclick="editTM('{{d._id}}')">修改</div>
+  
+	
+
+</script>
+<script type="text/javascript" src="/ay/assets/login.js"></script>
+</body>
+  
+</html>

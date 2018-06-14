@@ -1,0 +1,72 @@
+#bmaparea{
+	width:100%;
+	
+	
+}
+
+#bmaparea #bmap{
+	width:100%;
+	height: 200px;
+	position: relative;
+	
+}
+#bmaparea #bmapres{
+	width:100%;
+	height:200px;
+	
+	overflow: auto;
+	
+	
+}
+
+
+#bmaparea .fa-map-marker{
+	color:#41ACFF;
+	font-size: 25px;
+	display: inline-block;
+	margin-right: 12px;
+	position: absolute;
+	left:130px;
+	top:30px;
+	z-index: 9999999;
+}
+#bmaparea #bmapaddress{
+	
+	display: inline-block;
+	width:300px;
+	position: relative;
+	padding-left: 50px;
+	margin-left: 100px
+}
+#bmaparea #head{
+	line-height: 40px;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	clear: both;
+	margin: 0
+}
+.tangram-suggestion-main {z-index: 9999999999;}
+
+#allarea .oneadd{
+	
+	line-height: 40px;
+	max-width:100%;
+	overflow: hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#allarea .oneadd:hover{
+	
+	background-color: #f0f0f0
+}
+#allarea .oneadd i{
+	color:#41ACFF;
+	font-size: 18px;
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 12px;
+}
+#allarea .oneadd span{
+	
+	font-size: 11px;
+	color:#999
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd 
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/task   
+http://www.springframework.org/schema/task/spring-task-3.0.xsd
+http://www.springframework.org/schema/data/mongo
+http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+
+	<!-- 自动扫描组件， 去除controller，如果不去除会影响事务 -->
+	<context:component-scan base-package="com.hysm">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 自动扫描，自动扫描以下文件目录应用事务 -->
+	<context:component-scan base-package="com.hysm.mapper" />
+	<context:component-scan base-package="com.hysm.service" />
+	<context:component-scan base-package="com.hysm.db" />
+	<context:component-scan base-package="com.hysm.game" />
+	<!-- 启用注解 -->
+	<context:component-scan base-package="com.hysm.service.roles" />
+
+
+
+
+
+
+  
+
+	<!-- 上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+	<!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+	
+
+
+
+
+
+
+
+
+
+	<!-- 自定义的Realm -->
+	<bean id="shiroRealm" class="com.hysm.security.ShiroRealm"></bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroRealm" />
+	</bean>
+	
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/" />
+		<property name="successUrl" value="/login_index" />
+		<!-- 登录失败跳转路径 -->
+		<property name="unauthorizedUrl" value="/login_toLogin" />
+		<!-- 过滤链定义 -->
+		<property name="filterChainDefinitions">
+			<!-- , roles[admin], perms[document:read] -->
+			<!-- authc拦截器提取请求参数并执行验证 -->
+			<value>/login_toLogin = authc
+			
+<!-- 			/roles/** = authc -->
+<!-- 			/users/** = authc -->
+			
+			</value>
+			
+		</property>
+	</bean>
+
+	
+	
+	<!--  开启这个配置，spring才能识别@Scheduled注解   -->  
+    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
+    <task:scheduler id="qbScheduler" pool-size="10"/>  
+</beans>
+

@@ -1,0 +1,160 @@
+package com.hysm.controller.game;
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.hysm.controller.base.BaseController;
+import com.hysm.game.GameUtil;
+import com.hysm.game.GameVO;
+import com.hysm.service.IMessageService;
+
+@Controller
+@RequestMapping("/jdgame")
+public class JdGameController extends BaseController {
+	@Autowired
+	private IMessageService meService;
+	@RequestMapping("getData")
+	public void getData(HttpServletRequest req, HttpServletResponse resp) {
+
+	
+		// 请求竞技用户
+
+		GameVO game = this.queryGame(req);
+
+		// 返回组合数据
+
+		sendJSONP(game.getData().toJSONString(), resp, "initReq", 1);
+	}
+
+	private GameVO queryGame(HttpServletRequest req) {
+		
+		
+		String uid = req.getParameter("uid");
+		
+//		System.out.println("sessionid=="+uid);
+		
+		
+		
+		GameVO game = null;
+
+		
+		// 是否在竞答
+		if (!GameUtil.cusers.containsKey(uid)) {
+			// 是 获取比赛组合
+
+			
+			game=GameUtil.queryGameByuid(uid);
+
+		
+
+		} 
+
+		
+		
+		
+		if (game != null) {
+			
+				if(!game.exterTime(uid)){
+					//过期
+					GameUtil.removeGame(game);
+					
+				}
+				
+				if(!game.hadItems()){
+					//查找题目
+					JSONArray items=meService.ajaxTestQuestions();
+					
+					game.setItems(items);
+					
+				}
+				
+			
+		}
+
+		while (game == null) {
+
+			game=GameUtil.queryGameByuid(uid);
+		}
+
+		return game;
+
+	}
+		
+	
+	/**
+	 * 答题上传
+	 * @param req
+	 * @param resp
+	 */
+	@RequestMapping("sendThisItem")
+	public void sendThisItem(HttpServletRequest req, HttpServletResponse resp){
+		
+		GameVO game = this.queryGame(req);
+		
+		
+		String uid=req.getParameter("uid");
+		String choose=req.getParameter("choose");
+		int index=Integer.valueOf(req.getParameter("index"));
+		long etime=System.currentTimeMillis();
+		game.sendUserRes(uid,index,choose,etime);
+		
+//		System.out.println("test:"+game.getData().getJSONArray(GameUtil.KEY_ITEMS).getJSONObject(index-1).toJSONString());
+		sendJSONP(game.getData().toJSONString(), resp, "sendThisItemShow", 1);
+		
+		
+		
+		
+		if(game.getStatus()==GameUtil.status[2]){
+			meService.addJDres(game);
+			
+		}
+		
+		
+	}
+	
+	
+	/**
+	 * 竞答开始
+	 * @param req
+	 * @param resp
+	 */
+	@RequestMapping("startJD")
+	public void startJD(HttpServletRequest req, HttpServletResponse resp){
+		
+		GameVO game = this.queryGame(req);
+		
+		String uid=req.getParameter("uid");
+		int index=Integer.valueOf(req.getParameter("index"));
+		
+		
+		
+		game.itemStart(uid,index);
+		
+		
+//		System.out.println(game.getData().getJSONArray(GameUtil.KEY_ITEMS).getJSONObject(index-1).toJSONString());
+		if(game.getStatus()!=GameUtil.status[2]){
+			
+			sendJSONP("200", resp, "startJDshow", 3);
+		  
+		}else{
+			//有人离开，竞答结束
+			sendJSONP(game.getData().toJSONString(), resp, "startJDshow", 1);
+			
+			meService.addJDres(game);
+		}
+	
+		
+		
+		
+		
+	}
+
+
+}
